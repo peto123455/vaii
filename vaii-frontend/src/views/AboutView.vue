@@ -1,7 +1,9 @@
+<script setup lang="ts">
+  import AboutUs from '../components/AboutUs.vue'
+</script>
+
 <template>
-  <div class="about">
-    <h1>O nás</h1>
-  </div>
+  <AboutUs />
 </template>
 
 <style>

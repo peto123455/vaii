@@ -4,6 +4,6 @@ import Pricing from '../components/Pricing.vue'
 
 <template>
   <main>
-    <h1 class="fw-bold text-center mt-5">🔧 Na tomto sa stále pracuje 🔧</h1>
+    <Pricing />
   </main>
 </template>
