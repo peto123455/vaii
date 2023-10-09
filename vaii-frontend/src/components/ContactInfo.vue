@@ -3,7 +3,7 @@
 
 <template>
   <div class="container">
-    <div class="row row-cols-1 row-cols-lg-2 mb-3">
+    <div class="row row-cols-1 row-cols-lg-2">
       <div class="col">
         <h2 class="mt-5 px-5">Kontakt</h2>
         <h3 class="p-5 pt-0" >

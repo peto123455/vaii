@@ -10,10 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPhone, faLocationPin, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faPhone);
-library.add(faLocationPin);
-library.add(faEnvelope);
-library.add(faLock);
+library.add([faEnvelope, faPhone, faLocationPin, faEnvelope, faLock]);
 
 const app = createApp(App);
 

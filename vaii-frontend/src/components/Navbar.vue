@@ -4,11 +4,11 @@
 <template>
   <nav class="navbar navbar-dark bg-dark">
     <ul>
-      <li class="nav-brand"><RouterLink to="/" class="title">Profi Autoškola</RouterLink></li>
+      <li class="nav-brand"><RouterLink to="/" class="title">PROFI Autoškola</RouterLink></li>
       <li class="nav-item"><RouterLink to="/">Domov</RouterLink></li>
       <li class="nav-item"><RouterLink to="/pricing">Cenník</RouterLink></li>
       <li class="nav-item"><RouterLink to="/about">O nás</RouterLink></li>
-      <li class="nav-item"><RouterLink to="/contact">Kontakt</RouterLink></li>
+      <!--<li class="nav-item"><RouterLink to="/contact">Kontakt</RouterLink></li>--->
       <li class="nav-item"><RouterLink to="/login">Konto</RouterLink></li>
     </ul>
   </nav>
