@@ -6,7 +6,8 @@ import Navbar from './components/Navbar.vue'
 
 <template>
   <header>
-    <Navbar msg="You did it!" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rubik">
+    <Navbar/>
   </header>
 
   <RouterView />

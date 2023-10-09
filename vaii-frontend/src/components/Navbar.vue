@@ -43,10 +43,6 @@ li:not(:first-child):hover {
   border-radius: 5px;
 }
 
-/*li:first-child {
-  margin-left: 12px;
-}*/
-
 li:last-child {
   float: right;
   background-color: green;
