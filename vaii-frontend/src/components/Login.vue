@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import state from "@/state"
 </script>
 
 <template>
@@ -14,6 +15,9 @@
         <input type="password" class="form-control" placeholder="Password" required="true" id="password">
       </div>
       <button type="submit" class="btn btn-primary mt-3 w-100">Prihlásiť sa</button>
+      <button type="button" @click="state.methods.CreatePopup({id: state.methods.GetId(), msg: 'test'})">
+        Error trigger: {{ count }}
+      </button>
     </form>
   </div>
 </template>
