@@ -4,7 +4,7 @@
 <template>
   <nav class="navbar navbar-dark bg-dark">
     <ul>
-      <li class="nav-item"><RouterLink to="/" class="title">Profi Autoškola</RouterLink></li>
+      <li class="nav-brand"><RouterLink to="/" class="title">Profi Autoškola</RouterLink></li>
       <li class="nav-item"><RouterLink to="/">Domov</RouterLink></li>
       <li class="nav-item"><RouterLink to="/pricing">Cenník</RouterLink></li>
       <li class="nav-item"><RouterLink to="/about">O nás</RouterLink></li>
@@ -20,7 +20,6 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  position: sticky;
   top: 0;
   width: 100%;
 }

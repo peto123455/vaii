@@ -1,8 +1,12 @@
+<script setup lang="ts">
+  import ContactInfo from '../components/ContactInfo.vue'
+</script>
+
 <template>
-  <div class="contact">
-    <h1 class="fw-bold text-center mt-5">🔧 Na tomto sa stále pracuje 🔧</h1>
+  <div class="contact mt-5">
+    <ContactInfo />
   </div>
 </template>
 
-<style>
+<style scoped>
 </style>

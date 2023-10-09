@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ImageSlider from '../components/ImageSlider.vue'
 import News from '../components/News.vue'
+import ContactInfo from '../components/ContactInfo.vue'
 </script>
 
 <template>
@@ -15,6 +16,9 @@ import News from '../components/News.vue'
       S veľkou radosťou oznamujeme, že naša autoškola investovala do ďalšieho zlepšenia našich kurzov pre skupinu B. 
       Zakúpili úplne nové vozidlá, ktoré budú slúžiť ako ideálny tréningový nástroj pre našich študentov.
       Nové vozidlá, vybavené najmodernejšími bezpečnostnými a technologickými prvky, nám umožnia poskytovať ešte lepší a efektívnejší výcvik pre všetkých, ktorí sa chystajú získať vodičské oprávnenie skupiny B. 
-    </News> 
+    </News>
+    <div class="bg-dark text-light p-5 mt-5">
+      <ContactInfo />
+    </div>
   </main>
 </template>

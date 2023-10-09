@@ -5,7 +5,7 @@ import Navbar from './components/Navbar.vue'
 </script>
 
 <template>
-  <header>
+  <header class="sticky-top">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rubik">
     <Navbar/>
   </header>

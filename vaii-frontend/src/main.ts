@@ -1,13 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap'
-import './assets/main.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap';
+import './assets/main.css';
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 
-const app = createApp(App)
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPhone, faLocationPin, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-app.use(router)
+library.add(faPhone);
+library.add(faLocationPin);
+library.add(faEnvelope);
 
-app.mount('#app')
+const app = createApp(App);
+
+app.component('font-awesome-icon', FontAwesomeIcon);
+
+app.use(router);
+
+app.mount('#app');
