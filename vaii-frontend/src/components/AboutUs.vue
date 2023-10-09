@@ -13,21 +13,21 @@
         </p>
       </div>
     </div>
-    <div class="row align-items-md-stretch mt-5">
-      <div class="col-md-6">
+    <div class="row row-cols-1 row-cols-md-2 mt-5">
+      <div class="col-md-6 mt-2">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
           <h2>Kladieme na bezpečnosť</h2>
-          <p>
+          <p class="mt-5">
             Pri našich výučbových hodinách klademe dôraz na bezpečnosť a zodpovednosť. 
             Naučíme vás nielen technickým aspektom vodičstva, ale aj dôležitým pravidlám a etike na ceste. 
             Veríme, že dobrý vodič je ten, kto má nielen schopnosti riadenia vozidla, ale aj vedomosti a znalosti potrebné na to, aby cestoval bezpečne a ohľaduplne voči ostatným účastníkom cestnej premávky.
           </p>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-2">
         <div class="h-100 p-5 text-white bg-dark rounded-3">
           <h2>Sme moderná autoškola</h2>
-          <p>
+          <p class="mt-5">
             Okrem teoretického a praktického výcviku vám tiež ponúkame moderné učebné prostredie a vozidlá vybavené najnovšou technológiou, aby sme vás pripravili na všetky výzvy na ceste. 
             Našim cieľom je, aby ste sa stali sebaistými a zodpovednými vodičmi, ktorí vedia, ako sa správať v rôznych situáciách.
           </p>

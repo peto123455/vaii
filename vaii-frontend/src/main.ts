@@ -7,12 +7,13 @@ import App from './App.vue';
 import router from './router';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPhone, faLocationPin, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faLocationPin, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faPhone);
 library.add(faLocationPin);
 library.add(faEnvelope);
+library.add(faLock);
 
 const app = createApp(App);
 
