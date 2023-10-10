@@ -7,6 +7,9 @@ const state = reactive({
 
 const methods = {
   CreatePopup(data: any) {
+    data.shown = false;
+    data.id = methods.GetId();
+
     state.popups.push(data);
 
     /*setTimeout(() => {
@@ -14,11 +17,16 @@ const methods = {
     }, 5000);*/
   },
   RemovePopup(id: number) {
+    state.popups = state.popups.filter((item) => {
+      return item.id !== id;
+    });
+  },
+  Show(id: number) {
     const index = state.popups.findIndex((item) => {
       return item.id === id;
     });
     if (index !== -1) {
-      state.popups.splice(index, 1);
+      state.popups[index].shown = true;
     }
   },
   GetId(): number {
@@ -26,7 +34,7 @@ const methods = {
 
     state.popups.forEach((item) => {
       if (item.id >= max) max = item.id + 1;
-    });
+  });
 
     return max;
   }
