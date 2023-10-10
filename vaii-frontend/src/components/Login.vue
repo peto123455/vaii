@@ -14,10 +14,9 @@ import state from "@/state"
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
         <input type="password" class="form-control" placeholder="Password" required="true" id="password">
       </div>
-      <button type="submit" class="btn btn-primary mt-3 w-100">Prihlásiť sa</button>
-      <button type="button" @click="state.methods.CreatePopup({title: 'Login Failed', msg: 'Connection to back-end failed.'})">
-        Error trigger: {{ count }}
-      </button>
+      <button type="button" 
+      @click="state.methods.CreatePopup({title: 'Login Failed', msg: 'Connection to back-end failed.'})" 
+      class="btn btn-primary mt-3 w-100">Prihlásiť sa</button>
     </form>
   </div>
 </template>
