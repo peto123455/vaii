@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="container">
+  <div class="container contactInfo">
     <div class="row row-cols-1 row-cols-lg-2">
       <div class="col">
         <h2 class="mt-5 px-5">Kontakt</h2>
@@ -19,8 +19,7 @@
         </h3>
       </div>
       <div class="col p-0 m-0">
-        <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Ve%C4%BEk%C3%A1%20Okru%C5%BEn%C3%A1%201,%20%C5%BDilina&t=&z=13&ie=UTF8&iwloc=&output=embed">
-        </iframe>   
+        <iframe class="p-2" id="gmap_canvas" src="https://maps.google.com/maps?q=Ve%C4%BEk%C3%A1%20Okru%C5%BEn%C3%A1%201,%20%C5%BDilina&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>  
       </div>
     </div>
   </div>
@@ -34,5 +33,9 @@ iframe {
 
 p {
   margin-top: 30pt;
+}
+
+.contactInfo {
+  font-family: Oswald, sans-serif;
 }
 </style>

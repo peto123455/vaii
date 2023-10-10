@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 mb-3">
-      <div class="col p-0" v-if="flipped">
+      <div class="col p-0 shadow" v-if="flipped">
         <img class="w-100 h-100 p-0" v-bind:src="props.imgSrc" alt="">
       </div>
       <div class="col">
@@ -18,7 +18,7 @@ const props = defineProps({
           <slot />
         </h3>
       </div>
-      <div class="col p-0" v-if="!flipped">
+      <div class="col p-0 shadow" v-if="!flipped">
         <img class="w-100 h-100 p-0" v-bind:src="props.imgSrc" alt="">
       </div>
     </div>
@@ -27,6 +27,6 @@ const props = defineProps({
 
 <style scoped>
 .row {
-  border: 2px solid black;
+  border: 2px solid #212529;
 }
 </style>

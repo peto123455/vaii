@@ -5,7 +5,7 @@ import ContactInfo from '../components/ContactInfo.vue'
 </script>
 
 <template>
-  <main>
+  <main class="home">
     <ImageSlider />
     <h1 class="fw-bold text-center my-5">Novinky</h1>
     <News title="Skupina C" imgSrc="/static-img/news-1.jpg">
@@ -22,3 +22,9 @@ import ContactInfo from '../components/ContactInfo.vue'
     </div>
   </main>
 </template>
+
+<style scoped>
+.home {
+  font-family: Oswald, sans-serif;
+}
+</style>

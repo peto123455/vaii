@@ -8,6 +8,7 @@ import Popups from './components/Popups.vue'
 <template>
   <header class="sticky-top">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rubik">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald">
     <Navbar/>
   </header>
   <Popups />
