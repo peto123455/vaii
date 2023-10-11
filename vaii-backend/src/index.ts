@@ -1,12 +1,11 @@
 import express, { Request, Response } from "express";
+import router from './router'
 
 const app = express();
 const port = 8080;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-})
+app.get('*', router);
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Backend started at port ${port}`);
 })
