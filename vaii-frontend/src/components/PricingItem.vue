@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import state from "../state"
+  
   const props = defineProps({
     title: String,
     price: String
@@ -16,7 +18,9 @@
         <ul class="list-unstyled mt-2 mb-3">
           <slot></slot>
         </ul>
-        <button type="button" class="w-100 btn btn-lg btn-primary">Zakúpiť</button>
+        <button type="button" 
+        @click="state.methods.CreatePopup({title: 'Purchase Failed', msg: 'Connection to back-end failed.'})"
+        class="w-100 btn btn-lg btn-primary">Zakúpiť</button>
       </div>
     </div>
   </div>

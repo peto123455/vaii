@@ -8,6 +8,7 @@
       <li class="nav-item"><RouterLink to="/">Domov</RouterLink></li>
       <li class="nav-item"><RouterLink to="/pricing">Cenník</RouterLink></li>
       <li class="nav-item"><RouterLink to="/about">O nás</RouterLink></li>
+      <li class="nav-item"><RouterLink to="/benefits">Prečo my</RouterLink></li>
       <!--<li class="nav-item"><RouterLink to="/contact">Kontakt</RouterLink></li>--->
       <li class="nav-item"><RouterLink to="/login">Konto</RouterLink></li>
     </ul>
