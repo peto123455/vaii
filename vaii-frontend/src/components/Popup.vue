@@ -30,7 +30,7 @@
 </script>
 
 <template>
-  <div ref="element" v-bind:id="props.id" class="toast shadow-lg" role="alert" data-bs-autohide="true" data-bs-animation="true">
+  <div ref="element" v-bind:id="props.id" class="toast shadow-lg" role="alert" data-bs-autohide="true" data-bs-animation="false">
     <div class="toast-header">
       <strong class="me-auto">{{ props.title }}</strong>
       <!--<small class="text-muted">Práve teraz</small>-->

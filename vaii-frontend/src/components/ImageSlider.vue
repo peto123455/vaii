@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+  <div id="imageSlider" class="carousel slide shadow-lg" data-bs-ride="carousel" data-bs-theme="dark">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#imageSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#imageSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -31,4 +31,21 @@
 </template>
 
 <style scoped>
+.carousel-inner {
+  height: 0;
+  padding-bottom: 33%;
+}
+
+.carousel-item {
+  position: absolute !important; /* Bootstrap is insistent */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.carousel-item img {
+  height: 100%; /* Bootstrap handles width already */
+  object-fit: cover; /* or 'contain' if you want stretch instead of crop */
+}
 </style>
