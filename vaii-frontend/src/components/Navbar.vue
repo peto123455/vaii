@@ -26,7 +26,7 @@
           <li class="nav-item"><RouterLink class="nav-link" to="/about">O nás</RouterLink></li>
           <li class="nav-item"><RouterLink class="nav-link" to="/benefits">Prečo my</RouterLink></li>
         </ul>
-        <form class="d-flex" role="search">
+        <form class="d-flex justify-content-center" role="search">
           <RouterLink class="btn btn-success" to="/login">Konto</RouterLink>
         </form>
       </div>
