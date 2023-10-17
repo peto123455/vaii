@@ -48,4 +48,16 @@
   height: 100%; /* Bootstrap handles width already */
   object-fit: cover; /* or 'contain' if you want stretch instead of crop */
 }
+
+.carousel-item:before {
+    -webkit-box-shadow: inset 0 0 5vw rgba(0, 0, 0, 1);
+    box-shadow: inset 0 0 5vw rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+}
+
 </style>

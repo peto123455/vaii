@@ -22,9 +22,9 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><RouterLink class="nav-link" to="/">Domov</RouterLink></li>
+          <li class="nav-item"><RouterLink class="nav-link" to="/benefits">Prečo my</RouterLink></li>
           <li class="nav-item"><RouterLink class="nav-link" to="/pricing">Cenník</RouterLink></li>
           <li class="nav-item"><RouterLink class="nav-link" to="/about">O nás</RouterLink></li>
-          <li class="nav-item"><RouterLink class="nav-link" to="/benefits">Prečo my</RouterLink></li>
         </ul>
         <form class="d-flex justify-content-center" role="search">
           <RouterLink class="btn btn-success" to="/login">Konto</RouterLink>
@@ -45,6 +45,9 @@
 }*/
 
 li {
+  transition: ease-in-out all .2s; 
+  -moz-transition: ease-in-out all .2s;
+  -webkit-transition: ease-in-out all .2s;
   float: left;
 }
 
@@ -52,12 +55,14 @@ li a {
   display: block;
   color: white !important;
   text-align: center;
-  padding: 4px 16px;
   text-decoration: none;
   font-weight: 600;
 }
 
 li:hover {
+  transition: ease-in-out all .2s; 
+  -moz-transition: ease-in-out all .2s;
+  -webkit-transition: ease-in-out all .2s;
   background-color: #111;
   border-radius: 5px;
 }
@@ -75,6 +80,7 @@ li:last-child:hover {
 
 .title {
   color: #b6631f;
+  font-weight: bold;
 }
 
 </style>
