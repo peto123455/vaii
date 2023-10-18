@@ -3,7 +3,7 @@ import state from "@/state"
 </script>
 
 <template>
-  <div class="container shadow mt-5 px-5 py-4 col-8 col-sm-6 col-lg-4 login">
+  <div class="container shadow p-4 m-0 w-100 login">
     <h2>Prihlásenie</h2>
     <form name="login" method="post" class="mt-3">
       <div class="input-group">
