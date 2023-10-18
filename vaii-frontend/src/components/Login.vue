@@ -12,7 +12,7 @@ import state from "@/state"
       </div>
       <div class="input-group mt-2">
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
-        <input type="password" class="form-control" placeholder="Password" required="true" id="password">
+        <input type="password" class="form-control" placeholder="Heslo" required="true" id="password">
       </div>
       <button type="button" 
       @click="state.methods.CreatePopup({title: 'Login Failed', msg: 'Connection to back-end failed.'})" 
