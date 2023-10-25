@@ -33,7 +33,7 @@
 <style scoped>
 .carousel-inner {
   height: 0;
-  padding-bottom: 33%;
+  padding-bottom: 26%;
 }
 
 .carousel-item {

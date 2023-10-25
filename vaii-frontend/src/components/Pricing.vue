@@ -3,8 +3,7 @@ import PricingItem from './PricingItem.vue'
 </script>
 
 <template>
-  <div class="container">
-    <h1 class="fw-bold text-center my-5">Cenník</h1>
+  <div class="container mt-5">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mb-3 text-center">
       <PricingItem title="Skupina A" price="799 €">
         <li>15 hodín teórie</li>
