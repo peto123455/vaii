@@ -50,8 +50,31 @@ function checkInput() {
   handleButtonValidity();
 }
 
-function sendRegistration() {
-  if (valid) state.methods.CreatePopup({title: 'Registration Failed', msg: 'Connection to back-end failed.'});
+async function sendRegistration() {
+  if (valid) {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        "email": email.value.value,
+        "password": password.value.value, 
+        "confirmPassword": confirmPassword.value.value
+      })
+    };
+    
+    try {
+      const res = await fetch("http://localhost:8080/auth/register", requestOptions); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+
+      if (data && data.length == 0) {
+        state.methods.CreatePopup({title: 'Registration Successful', msg: 'Your were successfully registered.'});
+      } else {
+        state.methods.CreatePopup({title: 'Registration Failed', msg: 'Something went wrong'});
+      }
+    } catch (error: any) {
+      state.methods.CreatePopup({title: 'Registration Failed', msg: 'Couldn\'t contact the Backend server. Please try again later'});
+    }
+  }
   else state.methods.CreatePopup({title: 'Registration Failed', msg: 'Invalid Input'});
 }
 
