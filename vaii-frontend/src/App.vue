@@ -3,6 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Navbar from './components/Navbar.vue'
 import Popups from './components/Popups.vue'
+import state from "@/state"
+
+state.methods.FetchUserFromServer();
 </script>
 
 <template>

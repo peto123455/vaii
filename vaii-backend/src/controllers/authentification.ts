@@ -5,6 +5,17 @@ import passport from "passport";
 import { Document } from "mongodb";
 import { IVerifyOptions } from "passport-local";
 
+export const UserInfo = async (req: Request, res: Response, next: NextFunction) => {
+    if (req.user == undefined) return res.status(200).json({ error: "Not logged in" });
+    
+    const user = req.user as Document;
+
+    res.json({
+        id: user._id,
+        email: user.email
+    });
+};
+
 export const Login = async (req: Request, res: Response, next: NextFunction) => {
 
     const email = req.body.email;

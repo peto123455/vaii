@@ -1,4 +1,32 @@
 <script setup lang="ts">
+import { onMounted, onUpdated, ref } from "vue";
+import state from "@/state"
+
+async function sendLogout() {
+
+  const requestOptions = {
+    method: "POST",
+    //withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    headers: { "Content-Type": "application/json" }
+  };
+
+  try {
+    const res = await fetch("http://localhost:8080/auth/logout", requestOptions); //TODO: Prerobiť na .env backend url
+    const data = await res.json();
+
+    state.methods.FetchUserFromServer();
+    state.methods.CreatePopup({title: 'Odhlásený', msg: 'Boli ste odhlásený.'});
+    
+  } catch (error: any) {
+    console.log(error);
+    state.methods.CreatePopup({title: 'Odhlásenie zlyhalo', msg: 'Nepodarilo sa kontaktovať server'});
+  }
+}
 </script>
 
 <template>
@@ -15,7 +43,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand title" href="/">PROFI Autoškola</a>
+      <a class="navbar-brand title">PROFI Autoškola</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,6 +55,10 @@
           <li class="nav-item"><RouterLink class="nav-link" to="/about">O nás</RouterLink></li>
         </ul>
         <form class="d-flex justify-content-center" role="search">
+          <span class="text-white m-auto mx-2">{{ state.methods.GetUserEmail() }}</span>
+          <button v-if="state.methods.IsLoggedIn()" type="button" 
+          @click="sendLogout()"
+          class="btn btn-danger mx-2" ref="button">Odhlásiť sa</button>
           <RouterLink class="btn btn-success" to="/login">Konto</RouterLink>
         </form>
       </div>

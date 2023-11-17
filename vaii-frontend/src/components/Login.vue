@@ -10,7 +10,7 @@ async function sendLogin() {
 
   const requestOptions = {
     method: "POST",
-    withCredentials: true,
+    //withCredentials: true,
     credentials: 'include',
     headers: {
       'Accept': 'application/json',
@@ -32,7 +32,10 @@ async function sendLogin() {
     } else {
       state.methods.CreatePopup({title: 'Login Failed', msg: 'Something went wrong'});
     }*/
-    if (data["id"]) state.methods.CreatePopup({title: 'Prihlásenie úspešné', msg: 'Ste úspešne prihlásený.'});
+    if (data["id"]) {
+      state.methods.FetchUserFromServer();
+      state.methods.CreatePopup({title: 'Prihlásenie úspešné', msg: 'Ste úspešne prihlásený.'});
+    }
     else state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Nesprávny email alebo heslo'});
     
   } catch (error: any) {

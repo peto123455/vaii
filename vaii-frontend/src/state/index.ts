@@ -1,11 +1,53 @@
 import { reactive, readonly } from "vue";
+import { User } from "@/objects/user";
 
 const state = reactive({
   /*popups: [] as any[]*/
-  popups: Array<any>()
+  popups: Array<any>(),
+  user: new User(undefined, undefined)
+  //user: 
 });
 
 const methods = {
+  async FetchUserFromServer() {
+    try {
+      const requestOptions = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        headers: { "Content-Type": "application/json" }
+      };
+
+      const res = await fetch("http://localhost:8080/auth/user", requestOptions); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+  
+      console.log(data);
+
+      if (data["id"] && !data["error"]) {
+        methods.SetUserParams(data["id"], data["email"]);
+      } else {
+        methods.SetUserParams(undefined, undefined);
+      }
+      
+    } catch (error: any) {
+      console.log(error);
+      methods.CreatePopup({title: 'Kontrola prihlásenia', msg: 'Nepodarilo sa kontaktovať server'});
+    }
+  },
+  SetUserParams(id: string, email: string) {
+    state.user.id = id;
+    state.user.email = email;
+  },
+  IsLoggedIn() : boolean {
+    return state.user.id != undefined;
+  },
+  GetUserEmail() : string {
+    if (!this.IsLoggedIn()) return "";
+    return state.user.email as string;
+  },
   CreatePopup(data: any) {
     data.shown = false;
     data.id = methods.GetId();
