@@ -1,14 +1,44 @@
 import { reactive, readonly } from "vue";
 import { User } from "@/objects/user";
+import { Category } from "@/objects/category";
 
 const state = reactive({
   /*popups: [] as any[]*/
+  categories: Array<Category>(),
   popups: Array<any>(),
   user: new User(undefined, undefined)
   //user: 
 });
 
 const methods = {
+  async FetchCategoriesFromServer() {
+
+    try {
+      const requestOptions = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const res = await fetch("http://localhost:8080/category/list", requestOptions); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+
+      state.categories = [];
+
+      for (const category in data) {
+        state.categories.push(new Category(data[category]["_id"], data[category]["name"], data[category]["theoryHours"], data[category]["driveHours"], data[category]["description"], data[category]["price"]));
+      }
+
+      console.log(state.categories)
+
+    } catch (error: any) {
+      console.log(error);
+      methods.CreatePopup({title: 'Sťahovanie skupín', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať cenník'});
+    }
+  },
   async FetchUserFromServer() {
     try {
       const requestOptions = {
@@ -17,8 +47,7 @@ const methods = {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        },
-        headers: { "Content-Type": "application/json" }
+        }
       };
 
       const res = await fetch("http://localhost:8080/auth/user", requestOptions); //TODO: Prerobiť na .env backend url

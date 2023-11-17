@@ -3,7 +3,6 @@ import User from "../models/user";
 import bcrypt from "bcrypt"
 import passport from "passport";
 import { Document } from "mongodb";
-import { IVerifyOptions } from "passport-local";
 
 export const UserInfo = async (req: Request, res: Response, next: NextFunction) => {
     if (req.user == undefined) return res.status(200).json({ error: "Nie ste prihlásený !" });

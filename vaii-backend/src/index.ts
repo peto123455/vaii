@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import Auth from './routes/auth';
+import Category from './routes/category';
 import mongoose from 'mongoose';
 import "dotenv/config";
 import bodyParser from "body-parser";
@@ -10,14 +11,6 @@ import MongoStore from 'connect-mongo';
 
 const app = express();
 const port = 8080;
-
-/*mongoose.connect(url, {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, () => {
-  console.log("DB connected");
-});*/
 
 async function connectdb() {
   try {
@@ -61,6 +54,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/auth', Auth);
+app.use('/category', Category);
 
 app.listen(port, () => {
   console.log(`Backend started at port ${port}`);

@@ -17,7 +17,6 @@ async function sendLogin() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ 
       "email": email.value.value,
       "password": password.value.value
