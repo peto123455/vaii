@@ -11,21 +11,31 @@ export const Login = async (req: Request, res: Response, next: NextFunction) => 
     const password = req.body.password;
 
     if (!email || !password) {
-        res.status(400).send("Bad Request !");
+        return res.status(400).json({ error: "Nesprávny formát !" });
     }
 
     passport.authenticate("local", (error: any, user: Document) => {
-        if (error) return res.status(500).send(error);
-        else if (!user) return res.status(400).send("Internal error");
+        //if (error) return res.status(500).send(error);
+        if (error) return next(error);
+        else if (!user) return res.status(401).json({ error: "Nesprávne meno alebo heslo !" });
 
         req.logIn(user, (error: any) => {
-            if (error) return res.status(500).send(error);
+            //if (error) return res.status(500).send(error);
+            if (error) return next(error);
 
             return res.status(200).json({
-                id: user.id
+                id: user.id,
+                email: user.email
             });
         });
     })(req, res, next);
+};
+
+export const Logout = async (req: Request, res: Response, next: NextFunction) => {
+    req.logout(function (error) {
+        if (error) console.log(error);
+        res.json({ message: "Logged out !" });
+    });
 };
 
 export const Register = async (req: Request, res: Response, next: NextFunction) => {

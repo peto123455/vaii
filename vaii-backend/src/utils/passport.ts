@@ -13,11 +13,10 @@ passport.use(new LocalStrategy({
     try {
         const user = await User.findOne({ email });
 
-        if (!user || !bcrypt.compareSync(password, user.password)) return done(null, false, { message: "Nesprávne meno alebo heslo." });
+        if (!user || !bcrypt.compareSync(password, user.password)) return done(null, false);
 
         return done(null, user);
     } catch (error: any) {
-        //return done(null, false, { message: "Niekde nastala chyba." });
         return done(error);
     }
 }));
