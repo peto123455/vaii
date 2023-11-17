@@ -14,6 +14,11 @@ npm run dev
 
 ### **Back-End časť** *(Nedokončené)*
 
+Potrebné vytvoriť .env súbor s MONGO URL v `vaii-backend`
+```env
+MONGO="mongodb+srv://{ADRESA}/?retryWrites=true&w=majority"
+```
+
 Back-End časť sa nachádza v priečinku `vaii-backend`
 ```bash
 npm install
