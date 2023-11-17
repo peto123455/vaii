@@ -2,6 +2,8 @@
 import { onMounted, ref } from "vue";
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import MenuItem from '../components/MenuItem.vue'
+import state from '@/state'
 
 const loginForm = ref(null);
 const registerForm = ref(null);
@@ -14,7 +16,7 @@ function changeForm(register: Boolean) {
 </script>
 
 <template>
-  <div class="container col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mt-5">
+  <div v-if="!state.methods.IsLoggedIn()" class="container col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mt-5">
     <div class="form-container">
       <div class="form-selector mb-2 d-flex justify-content-evenly">
         <input type="radio" class="btn-check" name="formSelector" id="optionLogin" autocomplete="off" @change="changeForm(false)" checked>
@@ -30,6 +32,16 @@ function changeForm(register: Boolean) {
       <div ref="registerForm" style="display: none;">
         <Register />
       </div>
+    </div>
+  </div>
+  <div v-if="state.methods.IsLoggedIn()" class="container mt-5">
+    <h1 class="text-center m-3">Uživateľský panel</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mb-3">
+      <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." />
+      <MenuItem title="Platby" description="Tu si môžeš pozrieť všetky tvoje čakajúce a zrealizované." />
+      <MenuItem title="Učebné materiály" description="Tu si môžeš pozrieť všetky čakajúce a zrealizované." />
+      <MenuItem title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." />
+      <MenuItem title="Správa užívateľov" description="Tu môžeš ako administrátor spravovať všetkých užívateľov." />
     </div>
   </div>
 </template>

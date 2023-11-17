@@ -6,7 +6,7 @@ import { Document } from "mongodb";
 import { IVerifyOptions } from "passport-local";
 
 export const UserInfo = async (req: Request, res: Response, next: NextFunction) => {
-    if (req.user == undefined) return res.status(200).json({ error: "Not logged in" });
+    if (req.user == undefined) return res.status(200).json({ error: "Nie ste prihlásený !" });
     
     const user = req.user as Document;
 
@@ -45,7 +45,7 @@ export const Login = async (req: Request, res: Response, next: NextFunction) => 
 export const Logout = async (req: Request, res: Response, next: NextFunction) => {
     req.logout(function (error) {
         if (error) console.log(error);
-        res.json({ message: "Logged out !" });
+        res.json({ message: "Odhlásený !" });
     });
 };
 
@@ -58,7 +58,7 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
     const confirmPassword = req.body.confirmPassword;
 
     if (!email || !password || !confirmPassword) {
-        problems.push("Invalid input !");
+        problems.push("Neplatný vstup !");
     } else {
         if (!email.includes("@")) { //TODO: REGEX
             problems.push("Email musí byť platný !");

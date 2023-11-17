@@ -55,11 +55,11 @@ async function sendLogout() {
           <li class="nav-item"><RouterLink class="nav-link" to="/about">O nás</RouterLink></li>
         </ul>
         <form class="d-flex justify-content-center" role="search">
-          <span class="text-white m-auto mx-2">{{ state.methods.GetUserEmail() }}</span>
+          <span class="text-white m-auto mx-2"><font-awesome-icon v-if="state.methods.IsLoggedIn()" class="mx-2" icon="user" />{{ state.methods.GetUserEmail() }}</span>
           <button v-if="state.methods.IsLoggedIn()" type="button" 
           @click="sendLogout()"
           class="btn btn-danger mx-2" ref="button">Odhlásiť sa</button>
-          <RouterLink class="btn btn-success" to="/login">Konto</RouterLink>
+          <RouterLink class="btn btn-success" to="/account">Konto</RouterLink>
         </form>
       </div>
     </div>

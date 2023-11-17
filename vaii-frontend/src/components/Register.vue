@@ -67,15 +67,15 @@ async function sendRegistration() {
       const data = await res.json();
 
       if (data && data.length == 0) {
-        state.methods.CreatePopup({title: 'Registration Successful', msg: 'Your were successfully registered.'});
+        state.methods.CreatePopup({title: 'Registrácia úspešná', msg: 'Úspešne ste sa zaregistrovali.'});
       } else {
-        state.methods.CreatePopup({title: 'Registration Failed', msg: 'Something went wrong'});
+        state.methods.CreatePopup({title: 'Registrácia zlyhala', msg: 'Niekde nastala chyba.'});
       }
     } catch (error: any) {
-      state.methods.CreatePopup({title: 'Registration Failed', msg: 'Couldn\'t contact the Backend server. Please try again later'});
+      state.methods.CreatePopup({title: 'Registrácia zlyhala', msg: 'Nepodarilo sa kontaktovať server, skúste neskôr.'});
     }
   }
-  else state.methods.CreatePopup({title: 'Registration Failed', msg: 'Invalid Input'});
+  else state.methods.CreatePopup({title: 'Registrácia zlyhala', msg: 'Neplatný vstup'});
 }
 
 function handleButtonValidity() {

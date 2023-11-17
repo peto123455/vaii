@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import state from "@/state"
+import state from "@/state";
+import router from "@/router";
 
 const email = ref(null);
 const password = ref(null);
@@ -35,6 +36,7 @@ async function sendLogin() {
     if (data["id"]) {
       state.methods.FetchUserFromServer();
       state.methods.CreatePopup({title: 'Prihlásenie úspešné', msg: 'Ste úspešne prihlásený.'});
+      //router.replace("/");
     }
     else state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Nesprávny email alebo heslo'});
     
