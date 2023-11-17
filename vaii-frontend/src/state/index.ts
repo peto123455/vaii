@@ -32,8 +32,6 @@ const methods = {
         state.categories.push(new Category(data[category]["_id"], data[category]["name"], data[category]["theoryHours"], data[category]["driveHours"], data[category]["description"], data[category]["price"]));
       }
 
-      console.log(state.categories)
-
     } catch (error: any) {
       console.log(error);
       methods.CreatePopup({title: 'Sťahovanie skupín', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať cenník'});
@@ -52,8 +50,6 @@ const methods = {
 
       const res = await fetch("http://localhost:8080/auth/user", requestOptions); //TODO: Prerobiť na .env backend url
       const data = await res.json();
-  
-      console.log(data);
 
       if (data["id"] && !data["error"]) {
         methods.SetUserParams(data["id"], data["email"]);

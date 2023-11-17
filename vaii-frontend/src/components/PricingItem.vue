@@ -4,7 +4,7 @@ import state from "../state"
 const props = defineProps({
   id: String,
   title: String,
-  price: String,
+  price: Number,
   theoryHours: Number,
   driveHours: Number,
   description: String,
