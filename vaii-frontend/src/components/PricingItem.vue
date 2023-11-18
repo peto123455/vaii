@@ -11,36 +11,21 @@ const props = defineProps({
   description: String,
 })
 
-async function sendDelete() {
-
-  const requestOptions = {
-    method: "POST",
-    //withCredentials: true,
-    credentials: 'include',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ 
-      "id": props.id
-    })
-  };
-
-  try {
-    const res = await fetch(GetAPIUrl("/category/delete"), requestOptions); //TODO: Prerobiť na .env backend url
-    const data = await res.json();
-
-    state.methods.FetchCategoriesFromServer();
-
-    if (!data["_id"]) {
-      state.methods.CreatePopup({title: 'Zmazanie zlyhalo', msg: 'Niekde nastala chyba !'});
+const emit = defineEmits(['onModalSelect'])
+ 
+const onModalSelect = () => {
+    const data = {
+      id: props.id,
+      name: props.title, 
+      price: props.price,
+      theoryHours: props.theoryHours,
+      driveHours: props.driveHours,
+      description: props.description
     }
-    
-  } catch (error: any) {
-    console.log(error);
-    state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Nepodarilo sa kontaktovať server'});
-  }
+
+    emit('onModalSelect', data);
 }
+
 </script>
 
 <template>
@@ -54,7 +39,7 @@ async function sendDelete() {
         <ul class="list-unstyled mt-2 mb-3">
           <!--<slot></slot>-->
           <li>{{ theoryHours }} hodín teórie</li>
-          <li>{{ theoryHours }} hodín jazdy</li>
+          <li>{{ driveHours }} hodín jazdy</li>
           <li>{{ description }}</li>
         </ul>
       </div>
@@ -62,8 +47,9 @@ async function sendDelete() {
         <button type="button" 
         @click="state.methods.CreatePopup({title: 'Purchase Failed', msg: 'Not implemented yet.'})"
         class="w-100 btn btn-lg btn-primary my-1">Zakúpiť</button>
-        <button v-if="state.methods.IsLoggedIn()" @click="sendDelete()" type="button" class="w-100 btn btn-lg btn-success my-1">Upraviť / Zmazať</button>
         <!--<button v-if="state.methods.IsLoggedIn()" type="button" class="w-100 btn btn-lg btn-danger my-1">Zmazať</button>-->
+        <button v-if="state.methods.IsLoggedIn()" type="button" class="w-100 btn btn-lg btn-success my-1" data-bs-toggle="modal" data-bs-target="#priceModal" data-bs-whatever="@getbootstrap" @click="onModalSelect()">Upraviť</button>
+        <!--<button v-if="state.methods.IsLoggedIn()" @click="sendDelete()" type="button" class="w-100 btn btn-lg btn-danger my-1">Zmazať</button>-->
       </div>
     </div>
   </div>
