@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import state from "@/state";
 import router from "@/router";
+import { GetAPIUrl } from "@/config"
 
 const email = ref(null);
 const password = ref(null);
@@ -24,7 +25,7 @@ async function sendLogin() {
   };
 
   try {
-    const res = await fetch("http://localhost:8080/auth/login", requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/auth/login"), requestOptions); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     /*if (data && data.length == 0) {

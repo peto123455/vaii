@@ -1,6 +1,7 @@
 import { reactive, readonly } from "vue";
 import { User } from "@/objects/user";
 import { Category } from "@/objects/category";
+import { GetAPIUrl } from "@/config"
 
 const state = reactive({
   /*popups: [] as any[]*/
@@ -23,7 +24,7 @@ const methods = {
         }
       };
 
-      const res = await fetch("http://localhost:8080/category/list", requestOptions); //TODO: Prerobiť na .env backend url
+      const res = await fetch(GetAPIUrl("/category/list"), requestOptions); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
       state.categories = [];
@@ -48,7 +49,7 @@ const methods = {
         }
       };
 
-      const res = await fetch("http://localhost:8080/auth/user", requestOptions); //TODO: Prerobiť na .env backend url
+      const res = await fetch(GetAPIUrl("/auth/user"), requestOptions); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
       if (data["id"] && !data["error"]) {

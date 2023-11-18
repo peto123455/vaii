@@ -2,6 +2,7 @@
 import PricingItem from './PricingItem.vue'
 import state from '@/state'
 import { ref } from 'vue'
+import { GetAPIUrl } from "@/config"
 
 const name = ref(null);
 const theoryHours = ref(null);
@@ -52,7 +53,7 @@ async function sendCategory() {
   };
 
   try {
-    const res = await fetch("http://localhost:8080/category/create", requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/category/create"), requestOptions); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchCategoriesFromServer();
@@ -78,7 +79,9 @@ async function sendCategory() {
 <template>
   <div class="container mt-5">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mb-3 text-center">
+      
       <PricingItem v-for="item in state.state.categories" :id="item.id" :title="item.name" :price="item.price" :theoryHours="item.theoryHours" :driveHours="item.driveHours" :description="item.description" />
+      
       <div v-if="state.methods.IsLoggedIn()" class="col d-flex align-items-stretch">
         <div class="card mb-4 rounded-3 shadow-sm flex-fill">
           <div class="card-header py-3">

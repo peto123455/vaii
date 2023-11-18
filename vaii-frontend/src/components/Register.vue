@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import state from "@/state"
+import { GetAPIUrl } from "@/config"
 
 const email = ref(null);
 const password = ref(null);
@@ -63,7 +64,7 @@ async function sendRegistration() {
     };
     
     try {
-      const res = await fetch("http://localhost:8080/auth/register", requestOptions); //TODO: Prerobiť na .env backend url
+      const res = await fetch(GetAPIUrl("/auth/register"), requestOptions); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
       if (data && data.length == 0) {

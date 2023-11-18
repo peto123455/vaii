@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import state from "../state"
+import { GetAPIUrl } from "@/config"
   
 const props = defineProps({
   id: String,
@@ -26,7 +27,7 @@ async function sendDelete() {
   };
 
   try {
-    const res = await fetch("http://localhost:8080/category/delete", requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/category/delete"), requestOptions); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchCategoriesFromServer();
