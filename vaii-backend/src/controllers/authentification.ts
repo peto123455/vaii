@@ -54,9 +54,9 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
 
     const email = req.body.email;
     const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
+    //const confirmPassword = req.body.confirmPassword;
 
-    if (!email || !password || !confirmPassword) {
+    if (!email || !password /*|| !confirmPassword*/) {
         problems.push("Neplatný vstup !");
     } else {
         if (!email.includes("@")) { //TODO: REGEX
@@ -75,9 +75,9 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
             problems.push("Heslo musí obsahovať aspoň 1 číslo !");
         }
     
-        if (confirmPassword != password) {
+        /*if (confirmPassword != password) {
             problems.push("Heslá sa nezhodujú !");
-        }
+        }*/
     }
 
     if (problems.length == 0) {
@@ -93,4 +93,44 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
     }
 
     return res.send(problems);
+};
+
+export const ChangePassword = async (req: Request, res: Response, next: NextFunction) => {
+
+    const password = req.body.password;
+    const currentPassword = req.body.currentPassword;
+    
+    if (!password || !currentPassword ||
+        password.length < 6 || 
+        password == password.toLowerCase() || password == password.toUpperCase() || 
+        !password.match("[0-9]")) {
+            return res.status(400).send({ "error": "Nesprávny Vstup" });
+    }
+
+    if (!req.user) return res.status(401).json({ "error": "Nie si prihlásený" });
+        
+    const id = (req.user as Document)._id;
+        
+    try {
+        const category = await User.findById(id);
+
+        const oldPassword = category?.password;
+
+        if (!bcrypt.compareSync(currentPassword, oldPassword as string)) {
+            return res.status(401).send({ "error": "Zadali ste zlé heslo" });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(password, salt);
+
+        (category as Document).password = hash;
+
+        category?.save();
+
+        return res.json({ "message": "Heslo úspešne zmenené !" });
+    } catch (error) {
+        console.log(error);
+    }
+    
+    return res.status(404).send({ "error": "Niekde nastala chyba" });
 };

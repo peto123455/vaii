@@ -37,13 +37,13 @@ function changeForm(register: Boolean) {
   <div v-if="state.methods.IsLoggedIn()" class="container mt-5">
     <h1 class="text-center m-3">Uživateľský panel</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mb-3">
-      <MenuItem title="Nastavenia účtu" description="Tu si môžeš meniť nastavenia účtu, ako napríklad heslo." />
-      <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." />
-      <MenuItem title="Platby" description="Tu si môžeš pozrieť všetky tvoje čakajúce a zrealizované." />
-      <MenuItem title="Učebné materiály" description="Tu si môžeš pozrieť všetky čakajúce a zrealizované platby." />
-      <MenuItem title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." />
-      <MenuItem title="Správa užívateľov" description="Tu môžeš ako administrátor spravovať všetkých užívateľov." />
-      <MenuItem title="Správa skupíny" description="Tu môžeš ako administrátor spravovať všetky skupiny a ich cenník." />
+      <MenuItem title="Nastavenia účtu" description="Tu si môžeš meniť nastavenia účtu, ako napríklad heslo." to="/account/settings" />
+      <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." to="/account" />
+      <MenuItem title="Platby" description="Tu si môžeš pozrieť všetky tvoje čakajúce a zrealizované." to="/account" />
+      <MenuItem title="Učebné materiály" description="Tu si môžeš pozrieť všetky čakajúce a zrealizované platby." to="/account" />
+      <MenuItem title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." to="/account" />
+      <MenuItem title="Správa užívateľov" description="Tu môžeš ako administrátor spravovať všetkých užívateľov." to="/account" />
+      <MenuItem title="Správa skupíny" description="Tu môžeš ako administrátor spravovať všetky skupiny a ich cenník." to="/pricing" />
     </div>
   </div>
 </template>
