@@ -89,7 +89,9 @@ async function sendUpdate() {
 
     state.methods.FetchCategoriesFromServer();
 
-    if (!data["_id"]) {
+    if (data["error"]) {
+      state.methods.CreatePopup({title: 'Úprava zlyhala', msg: data["error"]});
+    } else if (!data["_id"]) {
       state.methods.CreatePopup({title: 'Úprava zlyhala', msg: 'Niekde nastala chyba !'});
     }
     
@@ -165,7 +167,9 @@ async function sendCategory() {
 
     state.methods.FetchCategoriesFromServer();
 
-    if (!data["_id"]) {
+    if (data["error"]) {
+      state.methods.CreatePopup({title: 'Vytvorenie skupín', msg: data["error"]});
+    } else if (!data["_id"]) {
       state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Niekde nastala chyba !'});
     } else {
       name.value.value = "";

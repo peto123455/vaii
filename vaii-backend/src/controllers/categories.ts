@@ -9,10 +9,10 @@ export const CreateCategory = async (req: Request, res: Response, next: NextFunc
     const description = req.body.description;
     const price = req.body.price;
 
-    if (!name || !theoryHours || !driveHours || !description || !price) return res.status(400).send();
-    if (!req.user) return res.status(401).send();
+    if (!name || !theoryHours || !driveHours || !description || !price) return res.status(400).json({ "error": "Nezadali ste všetky potrebné parametre !" });
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
 
-    if (isNaN(theoryHours) || isNaN(driveHours) || isNaN(price)) return res.status(400).send();
+    if (isNaN(theoryHours) || isNaN(driveHours) || isNaN(price)) return res.status(400).json({ "error": "Hodiny a cena musí byť číslo !" });
 
     try {
         const newCategory = new Category({ "name": name, "theoryHours": theoryHours, "driveHours": driveHours, "description": description, "price": price });
@@ -21,6 +21,7 @@ export const CreateCategory = async (req: Request, res: Response, next: NextFunc
         return res.json(newCategory);
     } catch (error) {
         console.log(error);
+        return res.json({ "error": "Niekde nastala chyba." })
     }
     
     return res.status(404).send();
@@ -36,15 +37,15 @@ export const ListCategories = async (req: Request, res: Response, next: NextFunc
         console.log(error);
     }
 
-    return res.status(404).send();
+    return res.status(404).json({ "error": "Niekde nastala chyba !" });
 };
 
 export const DeleteCategory = async (req: Request, res: Response, next: NextFunction) => {
 
     const id = req.body.id;
 
-    if (!id) return res.status(400).send();
-    if (!req.user) return res.status(401).send();
+    if (!id) return res.status(400).json({ "error": "Nezadali ste id !" });
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
 
     try {
         const categories = await Category.findByIdAndDelete(id);
@@ -54,7 +55,7 @@ export const DeleteCategory = async (req: Request, res: Response, next: NextFunc
         console.log(error);
     }
 
-    return res.status(404).send();
+    return res.status(404).json({ "error": "Nepodarilo sa nájsť kategóriu !" });
 };
 
 export const UpdateCategory = async (req: Request, res: Response, next: NextFunction) => {
@@ -66,8 +67,8 @@ export const UpdateCategory = async (req: Request, res: Response, next: NextFunc
     const description = req.body.description;
     const price = req.body.price;
 
-    if (!id || !name || !theoryHours || !driveHours || !description || !price) return res.status(400).send();
-    if (!req.user) return res.status(401).send();
+    if (!id || !name || !theoryHours || !driveHours || !description || !price) return res.status(400).json({ "error": "Nezadali ste potrebné parametre !" });
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
 
     try {
         const category = await Category.findByIdAndUpdate(id, {
@@ -83,5 +84,5 @@ export const UpdateCategory = async (req: Request, res: Response, next: NextFunc
         console.log(error);
     }
     
-    return res.status(404).send();
+    return res.status(404).json({ "error": "Nepodarilo sa nájsť kategóriu !" });
 };

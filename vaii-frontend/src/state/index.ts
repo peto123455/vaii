@@ -29,6 +29,10 @@ const methods = {
 
       state.categories = [];
 
+      if (data["error"]) {
+        return methods.CreatePopup({title: 'Sťahovanie skupín', msg: data["error"]});
+      }
+
       for (const category in data) {
         state.categories.push(new Category(data[category]["_id"], data[category]["name"], data[category]["theoryHours"], data[category]["driveHours"], data[category]["description"], data[category]["price"]));
       }
@@ -56,6 +60,10 @@ const methods = {
         methods.SetUserParams(data["id"], data["email"]);
       } else {
         methods.SetUserParams(undefined, undefined);
+      }
+
+      if (data["error"]) {
+        return methods.CreatePopup({title: 'Sťahovanie skupín', msg: data["error"]});
       }
       
     } catch (error: any) {
