@@ -68,8 +68,8 @@ async function sendChangePassword() {
       <div class="col col-12 col-md-4 text-light d-flex align-items-stretch">
         <div class="bg-dark m-2 p-5 rounded-3 text-center flex-fill">
           <img class="profilepic" alt="profile picture" src="/static-img/profile.webp" />
-          <h5 class="mt-2">Peto123451</h5>
-          <h5>Administrátor</h5>
+          <h5 class="mt-2">{{ state.methods.GetUserEmail() }}</h5>
+          <h5>{{ state.methods.GetUserRank() }}</h5>
         </div>
       </div>
       <div class="col col-12 col-md-8 text-light text-light d-flex align-items-stretch">

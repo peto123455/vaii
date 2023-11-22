@@ -196,7 +196,7 @@ async function sendCategory() {
       :id="item.id" :title="item.name" :price="item.price" :theoryHours="item.theoryHours" :driveHours="item.driveHours" :description="item.description" 
       @onModalSelect="changeModal"/>
       
-      <div v-if="state.methods.IsLoggedIn()" class="col d-flex align-items-stretch">
+      <div v-if="state.methods.IsLoggedIn() && state.methods.GetUserPermLevel() >= 2" class="col d-flex align-items-stretch">
         <div class="card mb-4 rounded-3 shadow-sm flex-fill">
           <div class="card-header py-3">
             <h4 class="my-0 fw-bold">Nová Skupina</h4>

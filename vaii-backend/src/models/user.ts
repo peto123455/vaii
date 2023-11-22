@@ -10,6 +10,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     }, 
+    permLevel: {
+        type: Number,
+        required: true,
+        default: 0
+    }
 });
 
 export default model("user", userSchema);

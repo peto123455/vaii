@@ -3,6 +3,7 @@ import User from "../models/user";
 import bcrypt from "bcrypt"
 import passport from "passport";
 import { Document } from "mongodb";
+import { GetRankByLevel } from "../utils/ranks";
 
 export const UserInfo = async (req: Request, res: Response, next: NextFunction) => {
     if (req.user == undefined) return res.status(200).json({ error: "Nie ste prihlásený !" });
@@ -11,7 +12,9 @@ export const UserInfo = async (req: Request, res: Response, next: NextFunction) 
 
     res.json({
         id: user._id,
-        email: user.email
+        email: user.email,
+        permLevel: user.permLevel,
+        rank: GetRankByLevel(user.permLevel)
     });
 };
 
@@ -33,9 +36,11 @@ export const Login = async (req: Request, res: Response, next: NextFunction) => 
             //if (error) return res.status(500).send(error);
             if (error) return next(error);
 
-            return res.status(200).json({
-                id: user.id,
-                email: user.email
+            return res.json({
+                id: user._id,
+                email: user.email,
+                permLevel: user.permLevel,
+                rank: GetRankByLevel(user.permLevel)
             });
         });
     })(req, res, next);

@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import Category from "../models/category";
+import { Ranks, HasUserPermissions } from "../utils/ranks";
 
 export const CreateCategory = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -11,6 +12,7 @@ export const CreateCategory = async (req: Request, res: Response, next: NextFunc
 
     if (!name || !theoryHours || !driveHours || !description || !price) return res.status(400).json({ "error": "Nezadali ste všetky potrebné parametre !" });
     if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
 
     if (isNaN(theoryHours) || isNaN(driveHours) || isNaN(price)) return res.status(400).json({ "error": "Hodiny a cena musí byť číslo !" });
 
@@ -35,9 +37,9 @@ export const ListCategories = async (req: Request, res: Response, next: NextFunc
         return res.json(categories);
     } catch (error) {
         console.log(error);
+        return res.status(404).json({ "error": "Niekde nastala chyba !" });
     }
 
-    return res.status(404).json({ "error": "Niekde nastala chyba !" });
 };
 
 export const DeleteCategory = async (req: Request, res: Response, next: NextFunction) => {
@@ -46,6 +48,8 @@ export const DeleteCategory = async (req: Request, res: Response, next: NextFunc
 
     if (!id) return res.status(400).json({ "error": "Nezadali ste id !" });
     if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+
 
     try {
         const categories = await Category.findByIdAndDelete(id);
@@ -69,6 +73,8 @@ export const UpdateCategory = async (req: Request, res: Response, next: NextFunc
 
     if (!id || !name || !theoryHours || !driveHours || !description || !price) return res.status(400).json({ "error": "Nezadali ste potrebné parametre !" });
     if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+
 
     try {
         const category = await Category.findByIdAndUpdate(id, {

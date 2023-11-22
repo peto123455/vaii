@@ -57,23 +57,25 @@ const methods = {
       const data = await res.json();
 
       if (data["id"] && !data["error"]) {
-        methods.SetUserParams(data["id"], data["email"]);
+        methods.SetUserParams(data["id"], data["email"], data["permLevel"], data["rank"]);
       } else {
-        methods.SetUserParams(undefined, undefined);
+        methods.SetUserParams(undefined, undefined, undefined, undefined);
       }
 
-      if (data["error"]) {
-        return methods.CreatePopup({title: 'Sťahovanie skupín', msg: data["error"]});
-      }
+      /*if (data["error"]) {
+        return methods.CreatePopup({title: 'Automatické prihlásenie', msg: data["error"]});
+      }*/
       
     } catch (error: any) {
       console.log(error);
       methods.CreatePopup({title: 'Kontrola prihlásenia', msg: 'Nepodarilo sa kontaktovať server'});
     }
   },
-  SetUserParams(id: string, email: string) {
+  SetUserParams(id: string, email: string, permLevel: number, rank: string) {
     state.user.id = id;
     state.user.email = email;
+    state.user.permLevel = permLevel;
+    state.user.rank = rank;
   },
   IsLoggedIn() : boolean {
     return state.user.id != undefined;
@@ -81,6 +83,14 @@ const methods = {
   GetUserEmail() : string {
     if (!this.IsLoggedIn()) return "";
     return state.user.email as string;
+  },
+  GetUserRank() : string {
+    if (!this.IsLoggedIn()) return "";
+    return state.user.rank as string;
+  },
+  GetUserPermLevel() : number {
+    if (!this.IsLoggedIn()) return -1;
+    return state.user.permLevel as number;
   },
   CreatePopup(data: any) {
     data.shown = false;

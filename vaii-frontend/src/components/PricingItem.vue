@@ -48,7 +48,7 @@ const onModalSelect = () => {
         @click="state.methods.CreatePopup({title: 'Purchase Failed', msg: 'Not implemented yet.'})"
         class="w-100 btn btn-lg btn-primary my-1">Zakúpiť</button>
         <!--<button v-if="state.methods.IsLoggedIn()" type="button" class="w-100 btn btn-lg btn-danger my-1">Zmazať</button>-->
-        <button v-if="state.methods.IsLoggedIn()" type="button" class="w-100 btn btn-lg btn-success my-1" data-bs-toggle="modal" data-bs-target="#priceModal" data-bs-whatever="@getbootstrap" @click="onModalSelect()">Upraviť</button>
+        <button v-if="state.methods.IsLoggedIn() && state.methods.GetUserPermLevel() >= 2" type="button" class="w-100 btn btn-lg btn-success my-1" data-bs-toggle="modal" data-bs-target="#priceModal" data-bs-whatever="@getbootstrap" @click="onModalSelect()">Upraviť</button>
         <!--<button v-if="state.methods.IsLoggedIn()" @click="sendDelete()" type="button" class="w-100 btn btn-lg btn-danger my-1">Zmazať</button>-->
       </div>
     </div>
