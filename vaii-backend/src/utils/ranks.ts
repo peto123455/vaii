@@ -3,13 +3,15 @@ import { Document } from "mongodb";
 export enum Ranks {
     USER = 0,
     INSTRUCTOR = 1,
-    ADMINISTRATOR = 2
+    ADMINISTRATOR = 2,
+    SUPERADMIN = 3
 }
 
 const ranks: Array<string> = [
     "Užívateľ",
     "Inštruktor",
-    "Administrátor"
+    "Administrátor",
+    "Super Administrátor"
 ]
 
 export function GetRankByLevel(level: number) : string {
