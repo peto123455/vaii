@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "compileAMP": "tsc",
     "run": "node out/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q out/index.js\""
   },
