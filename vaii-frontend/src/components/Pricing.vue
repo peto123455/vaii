@@ -3,27 +3,28 @@ import PricingItem from './PricingItem.vue'
 import state from '@/state'
 import { ref } from 'vue'
 import { GetAPIUrl } from "@/config"
+import { Category } from "@/objects/category";
 
-const name = ref(null);
-const theoryHours = ref(null);
-const driveHours = ref(null);
-const description = ref(null);
-const price = ref(null);
+const nameRef = ref(null);
+const theoryHoursRef = ref(null);
+const driveHoursRef = ref(null);
+const descriptionRef = ref(null);
+const priceRef = ref(null);
 
 let selectedModal: String = "";
-const nameModal = ref(null);
-const theoryHoursModal = ref(null);
-const driveHoursModal = ref(null);
-const descriptionModal = ref(null);
-const priceModal = ref(null);
+const nameModalRef = ref(null);
+const theoryHoursModalRef = ref(null);
+const driveHoursModalRef = ref(null);
+const descriptionModalRef = ref(null);
+const priceModalRef = ref(null);
 
 function changeModal(data: any) {
   selectedModal = data.id;
-  nameModal.value.textContent = data.name;
-  theoryHoursModal.value.value = data.theoryHours;
-  driveHoursModal.value.value = data.driveHours;
-  descriptionModal.value.value = data.description;
-  priceModal.value.value = data.price;
+  (nameModalRef.value! as HTMLHeadingElement).textContent = data.name;
+  (theoryHoursModalRef.value! as HTMLInputElement).value = data.theoryHours;
+  (driveHoursModalRef.value! as HTMLInputElement).value = data.driveHours;
+  (descriptionModalRef.value! as HTMLInputElement).value = data.description;
+  (priceModalRef.value! as HTMLInputElement).value = data.price;
 }
 
 async function sendDelete() {
@@ -42,7 +43,7 @@ async function sendDelete() {
   };
 
   try {
-    const res = await fetch(GetAPIUrl("/category/delete"), requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/category/delete"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchCategoriesFromServer();
@@ -59,8 +60,14 @@ async function sendDelete() {
 
 async function sendUpdate() {
 
-  if (!nameModal.value.textContent || !theoryHoursModal.value.value || !driveHoursModal.value.value ||
-  !descriptionModal.value.value || !priceModal.value.value ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Potrebné vyplniť celý formulár'});
+  const nameModal = (nameModalRef.value! as HTMLHeadingElement);
+  const theoryHoursModal = (theoryHoursModalRef.value! as HTMLInputElement);
+  const driveHoursModal = (driveHoursModalRef.value! as HTMLInputElement);
+  const descriptionModal = (descriptionModalRef.value! as HTMLInputElement);
+  const priceModal = (priceModalRef.value! as HTMLInputElement);
+
+  if (!nameModal.textContent || !theoryHoursModal.value || !driveHoursModal.value ||
+  !descriptionModal.value || !priceModal.value ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Potrebné vyplniť celý formulár'});
 
   const check = checkModalInput();
   if (check.length != 0 ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: check });;
@@ -75,16 +82,16 @@ async function sendUpdate() {
     },
     body: JSON.stringify({ 
       "id": selectedModal,
-      "name" :nameModal.value.textContent,
-      "theoryHours" :theoryHoursModal.value.value,
-      "driveHours" :driveHoursModal.value.value,
-      "description" :descriptionModal.value.value,
-      "price" :priceModal.value.value
+      "name" :nameModal.textContent,
+      "theoryHours" :theoryHoursModal.value,
+      "driveHours" :driveHoursModal.value,
+      "description" :descriptionModal.value,
+      "price" :priceModal.value
     })
   };
 
   try {
-    const res = await fetch(GetAPIUrl("/category/update"), requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/category/update"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchCategoriesFromServer();
@@ -104,15 +111,19 @@ async function sendUpdate() {
 function checkInput() {
   let text = "";
   
-  if (isNaN(theoryHours.value.value)) {
+  const theoryHours = (theoryHoursRef.value! as HTMLInputElement);
+  const driveHours = (driveHoursRef.value! as HTMLInputElement);
+  const price = (priceRef.value! as HTMLInputElement);
+
+  if (isNaN(theoryHours.value as any)) {
     text += "Počet hodín teórie musí byť číslo ! ";
   }
 
-  if (isNaN(driveHours.value.value)) {
+  if (isNaN(driveHours.value as any)) {
     text += "Počet hodín jázd musí byť číslo ! ";
   }
 
-  if (isNaN(price.value.value)) {
+  if (isNaN(price.value as any)) {
     text += "Cena musí byť číslo ! ";
   }
 
@@ -122,15 +133,19 @@ function checkInput() {
 function checkModalInput() {
   let text = "";
   
-  if (isNaN(theoryHoursModal.value.value)) {
+  const theoryHoursModal = (theoryHoursModalRef.value! as HTMLInputElement);
+  const driveHoursModal = (driveHoursModalRef.value! as HTMLInputElement);
+  const priceModal = (priceModalRef.value! as HTMLInputElement);
+
+  if (isNaN(theoryHoursModal.value as any)) {
     text += "Počet hodín teórie musí byť číslo ! ";
   }
 
-  if (isNaN(driveHoursModal.value.value)) {
+  if (isNaN(driveHoursModal.value as any)) {
     text += "Počet hodín jázd musí byť číslo ! ";
   }
 
-  if (isNaN(priceModal.value.value)) {
+  if (isNaN(priceModal.value as any)) {
     text += "Cena musí byť číslo ! ";
   }
 
@@ -138,8 +153,15 @@ function checkModalInput() {
 }
 
 async function sendCategory() {
-  if (!name.value.value || !theoryHours.value.value || !driveHours.value.value ||
-  !description.value.value || !price.value.value ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Potrebné vyplniť celý formulár'});
+
+  const name = (nameRef.value! as HTMLInputElement);
+  const theoryHours = (theoryHoursRef.value! as HTMLInputElement);
+  const driveHours = (driveHoursRef.value! as HTMLInputElement);
+  const description = (descriptionRef.value! as HTMLInputElement);
+  const price = (priceRef.value! as HTMLInputElement);
+
+  if (!name.value || !theoryHours.value || !driveHours.value ||
+  !description.value || !price.value ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Potrebné vyplniť celý formulár'});
 
   const check = checkInput();
   if (check.length != 0 ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: check });;
@@ -153,16 +175,16 @@ async function sendCategory() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ 
-      "name": name.value.value,
-      "theoryHours": theoryHours.value.value,
-      "driveHours": driveHours.value.value,
-      "description": description.value.value,
-      "price": price.value.value,
+      "name": name.value,
+      "theoryHours": theoryHours.value,
+      "driveHours": driveHours.value,
+      "description": description.value,
+      "price": price.value,
     })
   };
 
   try {
-    const res = await fetch(GetAPIUrl("/category/create"), requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/category/create"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchCategoriesFromServer();
@@ -172,11 +194,11 @@ async function sendCategory() {
     } else if (!data["_id"]) {
       state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Niekde nastala chyba !'});
     } else {
-      name.value.value = "";
-      theoryHours.value.value = "";
-      driveHours.value.value = "";
-      description.value.value = "";
-      price.value.value = "";
+      name.value = "";
+      theoryHours.value = "";
+      driveHours.value = "";
+      description.value = "";
+      price.value = "";
     }
     
   } catch (error: any) {
@@ -193,7 +215,7 @@ async function sendCategory() {
 
       <PricingItem 
       v-for="item in state.state.categories" 
-      :id="item.id" :title="item.name" :price="item.price" :theoryHours="item.theoryHours" :driveHours="item.driveHours" :description="item.description" 
+      :id="(item as Category).id as string" :title="(item as Category).name as string" :price="(item as Category).price as number" :theoryHours="(item as Category).theoryHours as number" :driveHours="(item as Category).driveHours as number" :description="(item as Category).description as string" 
       @onModalSelect="changeModal"/>
       
       <div v-if="state.methods.IsLoggedIn() && state.methods.GetUserPermLevel() >= 2" class="col d-flex align-items-stretch">
@@ -204,19 +226,19 @@ async function sendCategory() {
           <div class="card-body">
             <form name="category">
               <div class="input-group mt-3">
-                <input type="text" class="form-control" placeholder="Názov Skupiny" required="true" id="category-name" ref="name">
+                <input type="text" class="form-control" placeholder="Názov Skupiny" required="true" id="category-name" ref="nameRef">
               </div>
               <div class="input-group mt-3">
-                <input type="text" class="form-control" placeholder="Hodín teórie" required="true" id="category-theoryHours" ref="theoryHours">
+                <input type="text" class="form-control" placeholder="Hodín teórie" required="true" id="category-theoryHours" ref="theoryHoursRef">
               </div>
               <div class="input-group mt-3">
-                <input type="text" class="form-control" placeholder="Hodín jazdy" required="true" id="category-driveHours" ref="driveHours">
+                <input type="text" class="form-control" placeholder="Hodín jazdy" required="true" id="category-driveHours" ref="driveHoursRef">
               </div>
               <div class="input-group mt-3">
-                <input type="text" class="form-control" placeholder="Popis" required="true" id="category-description" ref="description">
+                <input type="text" class="form-control" placeholder="Popis" required="true" id="category-description" ref="descriptionRef">
               </div>
               <div class="input-group mt-3">
-                <input type="text" class="form-control" placeholder="Cena" required="true" id="category-price" ref="price">
+                <input type="text" class="form-control" placeholder="Cena" required="true" id="category-price" ref="priceRef">
               </div>
             </form>
           </div>
@@ -230,26 +252,26 @@ async function sendCategory() {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="priceModalLabel" ref="nameModal">Skupina</h5>
+              <h5 class="modal-title" id="priceModalLabel" ref="nameModalRef">Skupina</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form>
                 <div class="mb-3">
                   <label for="theoryHours" class="col-form-label">Hodín teórie:</label>
-                  <input type="text" class="form-control" ref="theoryHoursModal" id="theoryHours">
+                  <input type="text" class="form-control" ref="theoryHoursModalRef" id="theoryHours">
                 </div>
                 <div class="mb-3">
                   <label for="driveHours" class="col-form-label">Hodín jazdy:</label>
-                  <input type="text" class="form-control" ref="driveHoursModal" id="driveHours">
+                  <input type="text" class="form-control" ref="driveHoursModalRef" id="driveHours">
                 </div>
                 <div class="mb-3">
                   <label for="description" class="col-form-label">Popis:</label>
-                  <input type="text" class="form-control" ref="descriptionModal" id="description">
+                  <input type="text" class="form-control" ref="descriptionModalRef" id="description">
                 </div>
                 <div class="mb-3">
                   <label for="price" class="col-form-label">Cena:</label>
-                  <input type="text" class="form-control" ref="priceModal" id="price">
+                  <input type="text" class="form-control" ref="priceModalRef" id="price">
                 </div>
               </form>
             </div>

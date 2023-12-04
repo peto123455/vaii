@@ -7,7 +7,7 @@ const state = reactive({
   /*popups: [] as any[]*/
   categories: Array<Category>(),
   popups: Array<any>(),
-  user: new User(undefined, undefined)
+  user: new User(null, null, null, null)
   //user: 
 });
 
@@ -24,7 +24,7 @@ const methods = {
         }
       };
 
-      const res = await fetch(GetAPIUrl("/category/list"), requestOptions); //TODO: Prerobiť na .env backend url
+      const res = await fetch(GetAPIUrl("/category/list"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
       state.categories = [];
@@ -34,7 +34,7 @@ const methods = {
       }
 
       for (const category in data) {
-        state.categories.push(new Category(data[category]["_id"], data[category]["name"], data[category]["theoryHours"], data[category]["driveHours"], data[category]["description"], data[category]["price"]));
+        state.categories.push(new Category(data[category]["_id"] as string, data[category]["name"] as string, data[category]["theoryHours"] as number, data[category]["driveHours"] as number, data[category]["description"] as string, data[category]["price"] as number));
       }
 
     } catch (error: any) {
@@ -53,13 +53,13 @@ const methods = {
         }
       };
 
-      const res = await fetch(GetAPIUrl("/auth/user"), requestOptions); //TODO: Prerobiť na .env backend url
+      const res = await fetch(GetAPIUrl("/auth/user"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
       if (data["id"] && !data["error"]) {
         methods.SetUserParams(data["id"], data["email"], data["permLevel"], data["rank"]);
       } else {
-        methods.SetUserParams(undefined, undefined, undefined, undefined);
+        methods.SetUserParams(null, null, null, null);
       }
 
       /*if (data["error"]) {
@@ -71,7 +71,7 @@ const methods = {
       methods.CreatePopup({title: 'Kontrola prihlásenia', msg: 'Nepodarilo sa kontaktovať server'});
     }
   },
-  SetUserParams(id: string, email: string, permLevel: number, rank: string) {
+  SetUserParams(id: string | null, email: string | null, permLevel: number | null, rank: string | null) {
     state.user.id = id;
     state.user.email = email;
     state.user.permLevel = permLevel;

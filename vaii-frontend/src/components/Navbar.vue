@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUpdated, ref } from "vue";
 import state from "@/state"
+import { GetAPIUrl } from "@/config"
 
 async function sendLogout() {
 
@@ -11,12 +12,11 @@ async function sendLogout() {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    headers: { "Content-Type": "application/json" }
+    }
   };
 
   try {
-    const res = await fetch("http://localhost:8080/auth/logout", requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/auth/logout"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     state.methods.FetchUserFromServer();

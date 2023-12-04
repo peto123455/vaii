@@ -20,7 +20,7 @@
       </div>
       <div class="card-footer">
         <!--<button type="button" class="w-100 btn btn-lg btn-primary align-self-end mx-0 my-2">Vstúpiť</button>-->
-        <RouterLink class="w-100 btn btn-lg btn-primary align-self-end mx-0 my-2" :to="props.to">Vstúpiť</RouterLink>
+        <RouterLink class="w-100 btn btn-lg btn-primary align-self-end mx-0 my-2" :to="props.to!">Vstúpiť</RouterLink>
      </div>
     </div>
   </div>

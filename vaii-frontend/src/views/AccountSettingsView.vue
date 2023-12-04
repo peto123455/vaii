@@ -3,28 +3,33 @@ import { onMounted, ref } from "vue";
 import state from '@/state'
 import { GetAPIUrl } from "@/config"
 
-const oldPassword = ref(null);
-const newPassword = ref(null);
-const confirmPassword = ref(null);
+const oldPasswordRef = ref(null);
+const newPasswordRef = ref(null);
+const confirmPasswordRef = ref(null);
 
 async function sendChangePassword() {
-  if (!oldPassword.value.value || !newPassword.value.value || !confirmPassword.value.value) return state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Potrebné vyplniť údaje'});
+
+  const oldPassword = (oldPasswordRef.value! as HTMLInputElement);
+  const newPassword = (newPasswordRef.value! as HTMLInputElement);
+  const confirmPassword = (confirmPasswordRef.value! as HTMLInputElement);
+
+  if (!oldPassword.value || !newPassword.value || !confirmPassword.value) return state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Potrebné vyplniť údaje'});
 
   let text = "";
   //Presunúť do Utils
-  if (newPassword.value.value.length < 6) {
+  if (newPassword.value.length < 6) {
     text += "Heslo musí obsahovať aspoň 6 znakov ! ";
   }
 
-  if (newPassword.value.value == newPassword.value.value.toLowerCase() || newPassword.value.value == newPassword.value.value.toUpperCase()) {
+  if (newPassword.value == newPassword.value.toLowerCase() || newPassword.value == newPassword.value.toUpperCase()) {
     text += "Heslo musí obsahovať aspoň 1 veľký a malý znak ! ";
   }
 
-  if (!newPassword.value.value.match("[0-9]")) {
+  if (!newPassword.value.match("[0-9]")) {
     text += "Heslo musí obsahovať aspoň 1 číslo ! ";
   }
 
-  if (confirmPassword.value.value != newPassword.value.value) {
+  if (confirmPassword.value != newPassword.value) {
     text += "Heslá sa nezhodujú ! ";
   }
 
@@ -38,13 +43,13 @@ async function sendChangePassword() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ 
-      "currentPassword": oldPassword.value.value,
-      "password": newPassword.value.value
+      "currentPassword": oldPassword.value,
+      "password": newPassword.value
     })
   };
 
   try {
-    const res = await fetch(GetAPIUrl("/auth/change-password"), requestOptions); 
+    const res = await fetch(GetAPIUrl("/auth/change-password"), requestOptions as RequestInit); 
     const data = await res.json();
 
     if (data["message"]) {
@@ -84,19 +89,19 @@ async function sendChangePassword() {
             <div class="form-group row my-2">
               <label for="oldPassword" class="col-sm-3 col-form-label">Staré Heslo</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="oldPassword" ref="oldPassword" placeholder="Heslo">
+                <input type="password" class="form-control" id="oldPassword" ref="oldPasswordRef" placeholder="Heslo">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="newPassword" class="col-sm-3 col-form-label">Nové Heslo</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="newPassword" ref="newPassword" placeholder="Nové Heslo">
+                <input type="password" class="form-control" id="newPassword" ref="newPasswordRef" placeholder="Nové Heslo">
               </div>
             </div>
             <div class="form-group row my-2">
               <label for="confirmPassword" class="col-sm-3 col-form-label">Potvrď Heslo</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="confirmPassword" ref="confirmPassword" placeholder="Nové Heslo">
+                <input type="password" class="form-control" id="confirmPassword" ref="confirmPasswordRef" placeholder="Nové Heslo">
               </div>
             </div>
             <button @click="sendChangePassword()" class="btn btn-primary w-100 mt-2">Uložiť</button>

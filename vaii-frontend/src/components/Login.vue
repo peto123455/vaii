@@ -4,11 +4,15 @@ import state from "@/state";
 import router from "@/router";
 import { GetAPIUrl } from "@/config"
 
-const email = ref(null);
-const password = ref(null);
+const emailRef = ref(null);
+const passwordRef = ref(null);
 
 async function sendLogin() {
-  if (!email.value.value || !password.value.value) return state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Potrebné vyplniť email a heslo'});
+
+  const email = emailRef.value! as HTMLInputElement;
+  const password = passwordRef.value! as HTMLInputElement;
+
+  if (!(email.value || !password.value)) return state.methods.CreatePopup({title: 'Prihlásenie zlyhalo', msg: 'Potrebné vyplniť email a heslo'});
 
   const requestOptions = {
     method: "POST",
@@ -19,13 +23,13 @@ async function sendLogin() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ 
-      "email": email.value.value,
-      "password": password.value.value
+      "email": email.value,
+      "password": password.value
     })
   };
 
   try {
-    const res = await fetch(GetAPIUrl("/auth/login"), requestOptions); //TODO: Prerobiť na .env backend url
+    const res = await fetch(GetAPIUrl("/auth/login"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
     const data = await res.json();
 
     /*if (data && data.length == 0) {
@@ -53,11 +57,11 @@ async function sendLogin() {
     <form name="login" method="post" class="mt-3">
       <div class="input-group">
         <span class="input-group-text"><font-awesome-icon icon="envelope" /></span>
-        <input type="email" class="form-control" placeholder="Email" required="true" ref="email" id="email">
+        <input type="email" class="form-control" placeholder="Email" required="true" ref="emailRef" id="email">
       </div>
       <div class="input-group mt-2">
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
-        <input type="password" class="form-control" placeholder="Heslo" required="true" ref="password" id="password">
+        <input type="password" class="form-control" placeholder="Heslo" required="true" ref="passwordRef" id="password">
       </div>
       <button type="button" 
       @click="sendLogin()" 

@@ -9,8 +9,8 @@ const loginForm = ref(null);
 const registerForm = ref(null);
 
 function changeForm(register: Boolean) {
-  loginForm.value.style.display = register ? "none" : "block"
-  registerForm.value.style.display = register ? "block" : "none"
+  (loginForm.value! as HTMLDivElement).style.display = register ? "none" : "block";
+  (registerForm.value! as HTMLDivElement).style.display = register ? "block" : "none";
 }
 
 </script>

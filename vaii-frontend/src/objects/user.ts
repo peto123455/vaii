@@ -1,10 +1,10 @@
 export class User {
-    id?: String;
-    email?: String;
-    permLevel?: Number;
-    rank?: String;
+    id: String | null;
+    email: String | null;
+    permLevel: Number | null;
+    rank: String | null;
 
-    constructor(id?: String, email?: String, permLevel?: Number, rank?: String) {
+    constructor(id: String | null, email: String | null, permLevel: Number | null, rank: String | null) {
         this.id = id;
         this.email = email;
         this.permLevel = permLevel;
@@ -12,9 +12,9 @@ export class User {
     }
 
     reset() {
-        this.id = undefined;
-        this.email = undefined;
-        this.permLevel = undefined;
-        this.rank = undefined;
+        this.id = null;
+        this.email = null;
+        this.permLevel = null;
+        this.rank = null;
     }
 }

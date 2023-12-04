@@ -12,25 +12,28 @@
   const element = ref(null);
 
   onMounted(() => {
-    var toast = new Toast(element.value);
+    const div = (element.value! as HTMLDivElement);
+    
+    var toast = new Toast(div);
     toast.show();
     
-    element.value.addEventListener("hidden.bs.toast", function () {
+    div.addEventListener("hidden.bs.toast", function () {
       console.log(toast);
       //toast.show();
-      state.methods.RemovePopup(props.id);
+      state.methods.RemovePopup(props.id!);
     });
   });
-
+  
   onUpdated(() => {
-    var toast = new Toast(element.value);
+    const div = (element.value! as HTMLDivElement);
+    var toast = new Toast(div);
 
     toast.show();
   });
 </script>
 
 <template>
-  <div ref="element" v-bind:id="props.id" class="toast shadow-lg" role="alert" data-bs-autohide="true" data-bs-animation="false">
+  <div ref="element" v-bind:id="(props.id! as Number).toString()" class="toast shadow-lg" role="alert" data-bs-autohide="true" data-bs-animation="false">
     <div class="toast-header">
       <strong class="me-auto">{{ props.title }}</strong>
       <!--<small class="text-muted">Práve teraz</small>-->
