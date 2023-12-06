@@ -30,7 +30,7 @@ function changeModal(data: any) {
 async function sendDelete() {
 
   const requestOptions = {
-    method: "POST",
+    method: "DELETE",
     //withCredentials: true,
     credentials: 'include',
     headers: {
@@ -73,7 +73,7 @@ async function sendUpdate() {
   if (check.length != 0 ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: check });;
 
   const requestOptions = {
-    method: "POST",
+    method: "PUT",
     //withCredentials: true,
     credentials: 'include',
     headers: {

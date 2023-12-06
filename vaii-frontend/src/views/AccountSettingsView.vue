@@ -36,7 +36,7 @@ async function sendChangePassword() {
   if (text.length != 0) return state.methods.CreatePopup({title: 'Uloženie zlyhalo', msg: text });
 
   const requestOptions = {
-    method: "POST",
+    method: "PUT",
     credentials: 'include',
     headers: {
       'Accept': 'application/json',
