@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from "@/router"
 import state from "../state"
 import { GetAPIUrl } from "@/config"
 import { Course } from "@/objects/course";
@@ -19,14 +20,14 @@ const props = defineProps({
         <ul class="list-unstyled mt-2 mb-3">
           <!--<slot></slot>-->
           <li>Uhradené {{ course.paid }} €</li>
-          <li>{{ course.theoryHours }} / {{ course.theoryHoursCompleted }} hodín teórie</li>
-          <li>{{ course.driveHours }} / {{ course.driveHoursCompleted }} hodín jazdy</li>
+          <li>{{ course.theoryHoursCompleted }} / {{ course.theoryHours }} hodín teórie</li>
+          <li>{{ course.driveHoursCompleted }} / {{ course.driveHours }} hodín jazdy</li>
           <li>{{ course.description }}</li>
         </ul>
       </div>
       <div class="card-footer">
         <button type="button" 
-        @click="state.methods.CreatePopup({title: 'Failed', msg: 'Not implemented yet.'})"
+        @click="router.push('/account/courses/' + course.id);"
         class="w-100 btn btn-lg btn-primary my-1">Podrobnosti</button>
       </div>
     </div>

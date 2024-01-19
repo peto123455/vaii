@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import Course from "../models/course";
+import { Document } from "mongodb";
 import Category from "../models/category";
 import { Ranks, HasUserPermissions } from "../utils/ranks";
 
@@ -46,6 +47,26 @@ export const ListCourses = async (req: Request, res: Response, next: NextFunctio
         const courses = await Course.find({ "user": user });
 
         return res.json(courses);
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ "error": "Niekde nastala chyba !" });
+    }
+
+    return res.status(404).send();
+};
+
+export const GetCourse = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!req.params.id) return res.status(401).json({ "error": "Nezadané ID !" });
+
+    try {
+        const user = req.user as Document;
+
+        const course = await Course.findById(req.params.id);
+
+        if ((course?.user as Document)._id != user.id) return res.status(401).json({ "error": "Neoprávnený prístup !" });
+
+        return res.json(course);
     } catch (error) {
         console.log(error);
         return res.status(404).json({ "error": "Niekde nastala chyba !" });

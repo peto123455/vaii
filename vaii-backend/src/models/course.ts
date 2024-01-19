@@ -5,6 +5,7 @@ const courseSchema = new Schema({
     user: {
         type: ObjectId,
         required: true,
+        ref: "user"
     },
     name: {
         type: String,
