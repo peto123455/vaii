@@ -8,4 +8,6 @@ router.route('/').post(Course.CreateCourse)
 
 router.route('/getById/:id').get(Course.GetCourse);
 
+router.route('/listAll').get(Course.ListAllCourses);
+
 export default router;

@@ -62,7 +62,17 @@ const methods = {
       state.courses = [];
   
       for (const category in data) {
-        state.courses.push(new Course(data[category]["_id"] as string, data[category]["name"] as string, data[category]["theoryHours"] as number, data[category]["driveHours"] as number, data[category]["description"] as string, data[category]["price"] as number));
+        state.courses.push(new Course(data[category]["_id"] as string, 
+          data[category]["name"] as string, 
+          data[category]["theoryHours"] as number, 
+          data[category]["driveHours"] as number, 
+          data[category]["description"] as string, 
+          data[category]["price"] as number,
+          data[category]["theoryHoursCompleted"] as number, 
+          data[category]["driveHoursCompleted"] as number, 
+          data[category]["paid"] as number, 
+          data[category]["completed"] as boolean
+        ));
       }
   
     } catch (error: any) {

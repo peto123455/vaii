@@ -55,6 +55,22 @@ export const ListCourses = async (req: Request, res: Response, next: NextFunctio
     return res.status(404).send();
 };
 
+export const ListAllCourses = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!HasUserPermissions(req.user, Ranks.INSTRUCTOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+
+    try {
+        const courses = await Course.find({});
+
+        return res.json(courses);
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ "error": "Niekde nastala chyba !" });
+    }
+
+    return res.status(404).send();
+};
+
 export const GetCourse = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
     if (!req.params.id) return res.status(401).json({ "error": "Nezadané ID !" });
