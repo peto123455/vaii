@@ -11,7 +11,7 @@ const props = defineProps({
   description: String,
 })
 
-const emit = defineEmits(['onModalSelect'])
+const emit = defineEmits(['onModalSelect', 'enlistCourse'])
  
 const onModalSelect = () => {
     const data = {
@@ -24,6 +24,14 @@ const onModalSelect = () => {
     }
 
     emit('onModalSelect', data);
+}
+
+const enlistCourse = () => {
+    const data = {
+      id: props.id
+    }
+
+    emit('enlistCourse', data);
 }
 
 </script>
@@ -45,7 +53,7 @@ const onModalSelect = () => {
       </div>
       <div class="card-footer">
         <button type="button" 
-        @click="state.methods.CreatePopup({title: 'Purchase Failed', msg: 'Not implemented yet.'})"
+        @click="enlistCourse()"
         class="w-100 btn btn-lg btn-primary my-1">Zakúpiť</button>
         <!--<button v-if="state.methods.IsLoggedIn()" type="button" class="w-100 btn btn-lg btn-danger my-1">Zmazať</button>-->
         <button v-if="state.methods.IsLoggedIn() && state.methods.GetUserPermLevel() >= 2" type="button" class="w-100 btn btn-lg btn-success my-1" data-bs-toggle="modal" data-bs-target="#priceModal" data-bs-whatever="@getbootstrap" @click="onModalSelect()">Upraviť</button>

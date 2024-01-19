@@ -38,7 +38,7 @@ function changeForm(register: Boolean) {
     <h1 class="text-center m-3">Uživateľský panel</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mb-3">
       <MenuItem title="Nastavenia účtu" description="Tu si môžeš meniť nastavenia účtu, ako napríklad heslo." to="/account/settings" />
-      <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." to="/account" />
+      <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." to="/account/courses" />
       <MenuItem title="Platby" description="Tu si môžeš pozrieť všetky tvoje čakajúce a zrealizované." to="/account" />
       <MenuItem title="Učebné materiály" description="Tu si môžeš pozrieť učebné materiály." to="/account" />
       <MenuItem v-if="state.methods.GetUserPermLevel() >= 1" title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." to="/account" />

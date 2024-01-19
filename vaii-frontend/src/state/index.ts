@@ -1,11 +1,13 @@
 import { reactive, readonly } from "vue";
 import { User } from "@/objects/user";
 import { Category } from "@/objects/category";
+import { Course } from "@/objects/course";
 import { GetAPIUrl } from "@/config"
 
 const state = reactive({
   /*popups: [] as any[]*/
   categories: Array<Category>(),
+  courses: Array<Course>(),
   popups: Array<any>(),
   user: new User(null, null, null, null)
   //user: 
@@ -40,6 +42,31 @@ const methods = {
     } catch (error: any) {
       console.log(error);
       methods.CreatePopup({title: 'Sťahovanie skupín', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať cenník'});
+    }
+  },
+  async FetchCoursesFromServer() {
+
+    try {
+      const requestOptions = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+  
+      const res = await fetch(GetAPIUrl("/course"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+  
+      state.courses = [];
+  
+      for (const category in data) {
+        state.courses.push(new Course(data[category]["_id"] as string, data[category]["name"] as string, data[category]["theoryHours"] as number, data[category]["driveHours"] as number, data[category]["description"] as string, data[category]["price"] as number));
+      }
+  
+    } catch (error: any) {
+      console.log(error);
     }
   },
   async FetchUserFromServer() {

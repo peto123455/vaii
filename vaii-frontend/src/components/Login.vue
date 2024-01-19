@@ -39,6 +39,7 @@ async function sendLogin() {
     }*/
     if (data["id"]) {
       state.methods.FetchUserFromServer();
+      state.methods.FetchCoursesFromServer();
       state.methods.CreatePopup({title: 'Prihlásenie úspešné', msg: 'Ste úspešne prihlásený.'});
       //router.replace("/");
     }

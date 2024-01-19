@@ -7,6 +7,7 @@ import state from "@/state"
 
 state.methods.FetchUserFromServer();
 state.methods.FetchCategoriesFromServer();
+state.methods.FetchCoursesFromServer();
 </script>
 
 <template>

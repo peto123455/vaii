@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '../router'
 import PricingItem from './PricingItem.vue'
 import state from '@/state'
 import { ref } from 'vue'
@@ -55,6 +56,43 @@ async function sendDelete() {
   } catch (error: any) {
     console.log(error);
     state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: 'Nepodarilo sa kontaktovať server'});
+  }
+}
+
+async function enlistCourse(course: String) {
+  const check = checkModalInput();
+  if (check.length != 0 ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: check });;
+
+  const requestOptions = {
+    method: "POST",
+    //withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+      "course": course.id
+    })
+  };
+
+  try {
+    const res = await fetch(GetAPIUrl("/course"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
+    const data = await res.json();
+
+    if (data["error"]) {
+      state.methods.CreatePopup({title: 'Úprava zlyhala', msg: data["error"]});
+    } else if (!data["_id"]) {
+      state.methods.CreatePopup({title: 'Úprava zlyhala', msg: 'Niekde nastala chyba !'});
+    } else {
+      state.methods.FetchCoursesFromServer();
+      router.push("/account/courses");
+      state.methods.CreatePopup({title: 'Kurz prihlásený', msg: 'Kurz bol úspešne prihlásený !'});
+    }
+    
+  } catch (error: any) {
+    console.log(error);
+    state.methods.CreatePopup({title: 'Úprava zlyhala', msg: 'Nepodarilo sa kontaktovať server'});
   }
 }
 
@@ -216,7 +254,7 @@ async function sendCategory() {
       <PricingItem 
       v-for="item in state.state.categories" 
       :id="(item as Category).id as string" :title="(item as Category).name as string" :price="(item as Category).price as number" :theoryHours="(item as Category).theoryHours as number" :driveHours="(item as Category).driveHours as number" :description="(item as Category).description as string" 
-      @onModalSelect="changeModal"/>
+      @onModalSelect="changeModal" @enlistCourse="enlistCourse"/>
       
       <div v-if="state.methods.IsLoggedIn() && state.methods.GetUserPermLevel() >= 2" class="col d-flex align-items-stretch">
         <div class="card mb-4 rounded-3 shadow-sm flex-fill">
