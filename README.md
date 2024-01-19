@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-### **Back-End časť** *(Nedokončené)*
+### **Back-End časť**
 
 Potrebné vytvoriť .env súbor s MONGO URL v `vaii-backend`
 ```env
