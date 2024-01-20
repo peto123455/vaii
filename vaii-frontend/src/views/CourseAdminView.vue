@@ -35,6 +35,7 @@ async function fetchCourses() {
       state.methods.CreatePopup({title: 'Sťahovanie kurzov', msg: data["error"]});
     } else {
       store.courses = [];
+      console.log(data);
       for (const item in data) {
         store.courses.push(new Course(
           data[item]["_id"] as string, 
@@ -46,7 +47,8 @@ async function fetchCourses() {
           data[item]["theoryHoursCompleted"] as number, 
           data[item]["driveHoursCompleted"] as number, 
           data[item]["paid"] as number, 
-          data[item]["completed"] as boolean
+          data[item]["completed"] as boolean,
+          data[item]["user"]["email"] as string
         ));
       }
       console.log(store.courses);
@@ -66,8 +68,7 @@ async function fetchCourses() {
       <thead>
         <tr>
           <th scope="col">Názov Kurzu</th>
-          <th scope="col">Meno</th>
-          <th scope="col">Priezvisko</th>
+          <th scope="col">Email</th>
           <th scope="col">Teória</th>
           <th scope="col">Jazdy</th>
           <th scope="col"></th>

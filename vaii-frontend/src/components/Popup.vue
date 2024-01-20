@@ -18,7 +18,7 @@
     toast.show();
     
     div.addEventListener("hidden.bs.toast", function () {
-      console.log(toast);
+      //console.log(toast);
       //toast.show();
       state.methods.RemovePopup(props.id!);
     });

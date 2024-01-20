@@ -70,14 +70,14 @@ async function sendChangePassword() {
   <div v-if="state.methods.IsLoggedIn()" class="container mt-5">
     <h1 class="text-center m-3">Nastavenia účtu</h1>
     <div class="row">
-      <div class="col col-12 col-md-4 text-light d-flex align-items-stretch">
+      <div class="col col-12 col-lg-4 text-light d-flex align-items-stretch">
         <div class="bg-dark m-2 p-5 rounded-3 text-center flex-fill">
           <img class="profilepic" alt="profile picture" src="/static-img/profile.webp" />
           <h5 class="mt-2">{{ state.methods.GetUserEmail() }}</h5>
           <h5>{{ state.methods.GetUserRank() }}</h5>
         </div>
       </div>
-      <div class="col col-12 col-md-8 text-light text-light d-flex align-items-stretch">
+      <div class="col col-12 col-lg-8 text-light text-light d-flex align-items-stretch">
         <div class="bg-dark m-2 p-5 rounded-3 flex-fill">
 
             <div class="form-group row my-2">

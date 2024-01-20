@@ -41,7 +41,7 @@ function changeForm(register: Boolean) {
       <MenuItem title="Moje kurzy" description="Tu si môžeš pozrieť všetky tvoje priradené kurzy." to="/account/courses" />
       <MenuItem title="Platby" description="Tu si môžeš pozrieť všetky tvoje čakajúce a zrealizované." to="/account" />
       <MenuItem title="Učebné materiály" description="Tu si môžeš pozrieť učebné materiály." to="/account" />
-      <MenuItem v-if="state.methods.GetUserPermLevel() >= 1" title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." to="/account" />
+      <MenuItem v-if="state.methods.GetUserPermLevel() >= 1" title="Správa kurzov" description="Tu môžeš ako inštruktor spravovať všetky kurzy." to="/admin/courses/" />
       <MenuItem v-if="state.methods.GetUserPermLevel() >= 2" title="Správa užívateľov" description="Tu môžeš ako administrátor spravovať všetkých užívateľov." to="/account" />
       <MenuItem v-if="state.methods.GetUserPermLevel() >= 2" title="Správa skupíny" description="Tu môžeš ako administrátor spravovať všetky skupiny a ich cenník." to="/pricing" />
     </div>

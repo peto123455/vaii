@@ -11,7 +11,7 @@ const props = defineProps({
 
 <template>
   <div class="col d-flex align-items-stretch">
-    <div class="card mb-4 rounded-3 shadow-sm flex-fill">
+    <div :class="{ 'bg-complete': course.completed }" class="card mb-4 rounded-3 shadow-sm flex-fill">
       <div class="card-header py-3">
         <h4 class="my-0 fw-bold">{{ course.name }}</h4>
       </div>
@@ -20,8 +20,9 @@ const props = defineProps({
         <ul class="list-unstyled mt-2 mb-3">
           <!--<slot></slot>-->
           <li>Uhradené {{ course.paid }} €</li>
-          <li>{{ course.theoryHoursCompleted }} / {{ course.theoryHours }} hodín teórie</li>
-          <li>{{ course.driveHoursCompleted }} / {{ course.driveHours }} hodín jazdy</li>
+          <li v-if="course.completed" class="fw-bold">Kurz ukončený</li>
+          <li v-if="!course.completed">{{ course.theoryHoursCompleted }} / {{ course.theoryHours }} hodín teórie</li>
+          <li v-if="!course.completed">{{ course.driveHoursCompleted }} / {{ course.driveHours }} hodín jazdy</li>
           <li>{{ course.description }}</li>
         </ul>
       </div>

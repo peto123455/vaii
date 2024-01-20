@@ -30,6 +30,11 @@ const courseSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    notes: {
+        type: String,
+        required: false,
+        default: ""
     }, 
     price: {
         type: Number,

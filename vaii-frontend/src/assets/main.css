@@ -45,3 +45,7 @@ body {
   white-space: nowrap;
   z-index: 1;
 }
+
+.bg-complete {
+  background-color: rgb(177, 177, 177) !important;
+}

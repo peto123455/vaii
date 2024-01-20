@@ -9,8 +9,7 @@ export class Course {
     driveHoursCompleted: Number;
     paid: Number;
     completed: Boolean;
-    firstName: String;
-    lastName: String;
+    email: String;
 
     constructor(id: String,
         name: String,
@@ -22,8 +21,7 @@ export class Course {
         driveHoursCompleted: Number = 0,
         paid: Number = 0,
         completed: Boolean = false,
-        firstName: String = "",
-        lastName: String = "") {
+        email: String = "") {
             this.id = id;
             this.name = name;
             this.theoryHours = theoryHours;
@@ -34,7 +32,6 @@ export class Course {
             this.driveHoursCompleted = driveHoursCompleted;
             this.paid = paid;
             this.completed = completed;
-            this.firstName = firstName;
-            this.lastName = lastName;
+            this.email = email;
         }
 }

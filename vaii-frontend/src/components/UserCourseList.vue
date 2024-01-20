@@ -4,6 +4,10 @@ import state from '@/state'
 import { ref, onMounted } from 'vue'
 import { GetAPIUrl } from "@/config"
 import { Course } from "@/objects/course";
+
+onMounted(() => {
+  state.methods.FetchCoursesFromServer();
+})
 </script>
 
 <template>

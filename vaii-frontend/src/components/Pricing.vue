@@ -2,9 +2,13 @@
 import router from '../router'
 import PricingItem from './PricingItem.vue'
 import state from '@/state'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { GetAPIUrl } from "@/config"
 import { Category } from "@/objects/category";
+
+onMounted(() => {
+  state.methods.FetchCategoriesFromServer();
+})
 
 const nameRef = ref(null);
 const theoryHoursRef = ref(null);
