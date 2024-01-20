@@ -9,6 +9,7 @@ import "./utils/passport"
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import Course from "./routes/course";
+import Topic from "./routes/topics";
 
 const app = express();
 const port = 8080;
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
 app.use('/auth', Auth);
 app.use('/category', Category);
 app.use('/course', Course);
+app.use('/topics', Topic);
 
 app.listen(port, () => {
   console.log(`Backend started at port ${port}`);

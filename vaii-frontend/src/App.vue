@@ -6,6 +6,7 @@ import Popups from './components/Popups.vue'
 import state from "@/state"
 
 state.methods.FetchUserFromServer();
+state.methods.FetchTopicsFromServer();
 state.methods.FetchCategoriesFromServer();
 state.methods.FetchCoursesFromServer();
 </script>

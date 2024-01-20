@@ -3,10 +3,12 @@ import { User } from "@/objects/user";
 import { Category } from "@/objects/category";
 import { Course } from "@/objects/course";
 import { GetAPIUrl } from "@/config"
+import { Topic } from '@/objects/topic'
 
 const state = reactive({
   /*popups: [] as any[]*/
   categories: Array<Category>(),
+  topics: Array<Topic>(),
   courses: Array<Course>(),
   popups: Array<any>(),
   user: new User(null, null, null, null)
@@ -14,6 +16,38 @@ const state = reactive({
 });
 
 const methods = {
+  async FetchTopicsFromServer() {
+
+    try {
+      const requestOptions = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const res = await fetch(GetAPIUrl("/topics"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+
+      state.categories = [];
+
+      if (data["error"]) {
+        return methods.CreatePopup({title: 'Sťahovanie článkov', msg: data["error"]});
+      }
+
+      for (const category in data) {
+        state.topics.push(new Topic(data[category]["_id"] as string, data[category]["title"] as string, data[category]["description"] as string, data[category]["image"] as string));
+      }
+
+      console.log(state.topics);
+
+    } catch (error: any) {
+      console.log(error);
+      methods.CreatePopup({title: 'Sťahovanie článkov', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať články'});
+    }
+  },
   async FetchCategoriesFromServer() {
 
     try {

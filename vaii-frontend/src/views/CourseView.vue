@@ -232,12 +232,32 @@ function checkModalInput() {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavrieť</button>
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="deleteCourse()">Zmazať</button>
+              <button type="button" class="btn btn-danger"
+              data-bs-toggle="modal" data-bs-target="#courseDeleteModal">Zmazať</button>
               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="updateCourse()">Upraviť</button>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="modal" id="courseDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Zmazanie kurzu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Neozaj chcete tento kurz zmazať ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušiť</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="deleteCourse()">Zmazať</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -254,4 +274,7 @@ function checkModalInput() {
     border: 1px solid gray;
     border-radius: 5px;
   }*/
+#courseDeleteModal {
+  top: 30%;
+}
 </style>
