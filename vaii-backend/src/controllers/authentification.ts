@@ -3,7 +3,7 @@ import User from "../models/user";
 import bcrypt from "bcrypt"
 import passport from "passport";
 import { Document } from "mongodb";
-import { GetRankByLevel } from "../utils/ranks";
+import { GetRankByLevel, HasUserPermissions, Ranks, ranks } from "../utils/ranks";
 
 export const UserInfo = async (req: Request, res: Response, next: NextFunction) => {
     if (req.user == undefined) return res.status(200).json({ error: "Nie ste prihlásený !" });
@@ -16,6 +16,10 @@ export const UserInfo = async (req: Request, res: Response, next: NextFunction) 
         permLevel: user.permLevel,
         rank: GetRankByLevel(user.permLevel)
     });
+};
+
+export const RankList = async (req: Request, res: Response, next: NextFunction) => {
+    res.json(ranks);
 };
 
 export const Login = async (req: Request, res: Response, next: NextFunction) => {
@@ -139,3 +143,27 @@ export const ChangePassword = async (req: Request, res: Response, next: NextFunc
     
     return res.status(404).send({ "error": "Niekde nastala chyba" });
 };
+
+/* TODO
+export const ChangePermissions = async (req: Request, res: Response, next: NextFunction) => {
+
+    const name = req.body.name;
+    const permission = req.body.permission;
+    
+    if (!name || !permission) return res.status(400).send({ "error": "Nesprávny Vstup" });
+    if (!req.user) return res.status(401).json({ "error": "Nie si prihlásený" });
+    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+        
+    try {
+        const user = await User.find({ "name": name });
+
+
+        user.save();
+
+        return res.json({ "message": "Heslo úspešne zmenené !" });
+    } catch (error) {
+        console.log(error);
+    }
+    
+    return res.status(404).send({ "error": "Niekde nastala chyba" });
+};*/

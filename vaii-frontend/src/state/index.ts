@@ -7,6 +7,7 @@ import { Topic } from '@/objects/topic'
 
 const state = reactive({
   /*popups: [] as any[]*/
+  ranks: Array<String>(),
   categories: Array<Category>(),
   topics: Array<Topic>(),
   courses: Array<Course>(),
@@ -16,6 +17,36 @@ const state = reactive({
 });
 
 const methods = {
+  async FetchRanksFromServer() {
+
+    try {
+      const requestOptions = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const res = await fetch(GetAPIUrl("/auth/ranks"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
+      const data = await res.json();
+
+      state.categories = [];
+
+      if (data["error"]) {
+        return methods.CreatePopup({title: 'Sťahovanie hodností', msg: data["error"]});
+      }
+
+      for (const rank in data) {
+        state.ranks.push(data[rank] as string);
+      }
+
+    } catch (error: any) {
+      console.log(error);
+      methods.CreatePopup({title: 'Sťahovanie hodností', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať hodnosti'});
+    }
+  },
   async FetchTopicsFromServer() {
 
     try {
@@ -37,8 +68,8 @@ const methods = {
         return methods.CreatePopup({title: 'Sťahovanie článkov', msg: data["error"]});
       }
 
-      for (const category in data) {
-        state.topics.push(new Topic(data[category]["_id"] as string, data[category]["title"] as string, data[category]["description"] as string, data[category]["image"] as string));
+      for (const topic in data) {
+        state.topics.push(new Topic(data[topic]["_id"] as string, data[topic]["title"] as string, data[topic]["description"] as string, data[topic]["image"] as string));
       }
 
       console.log(state.topics);
@@ -95,17 +126,18 @@ const methods = {
   
       state.courses = [];
   
-      for (const category in data) {
-        state.courses.push(new Course(data[category]["_id"] as string, 
-          data[category]["name"] as string, 
-          data[category]["theoryHours"] as number, 
-          data[category]["driveHours"] as number, 
-          data[category]["description"] as string, 
-          data[category]["price"] as number,
-          data[category]["theoryHoursCompleted"] as number, 
-          data[category]["driveHoursCompleted"] as number, 
-          data[category]["paid"] as number, 
-          data[category]["completed"] as boolean
+      for (const course in data) {
+        state.courses.push(new Course(
+          data[course]["_id"] as string, 
+          data[course]["name"] as string, 
+          data[course]["theoryHours"] as number, 
+          data[course]["driveHours"] as number, 
+          data[course]["description"] as string, 
+          data[course]["price"] as number,
+          data[course]["theoryHoursCompleted"] as number, 
+          data[course]["driveHoursCompleted"] as number, 
+          data[course]["paid"] as number, 
+          data[course]["completed"] as boolean
         ));
       }
   

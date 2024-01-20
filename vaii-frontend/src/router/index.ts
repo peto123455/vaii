@@ -53,6 +53,11 @@ const router = createRouter({
       path: '/admin/courses/',
       name: 'CourseAdminView',
       component: () => import('../views/CourseAdminView.vue')
+    },
+    {
+      path: '/admin/permissions/',
+      name: 'AccountAdminPermissions',
+      component: () => import('../views/AccountAdminPermissions.vue')
     }
   ]
 })

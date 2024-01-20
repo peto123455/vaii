@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.vue'
 import Popups from './components/Popups.vue'
 import state from "@/state"
 
+state.methods.FetchRanksFromServer();
 state.methods.FetchUserFromServer();
 state.methods.FetchTopicsFromServer();
 state.methods.FetchCategoriesFromServer();

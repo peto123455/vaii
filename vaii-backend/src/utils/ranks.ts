@@ -7,7 +7,7 @@ export enum Ranks {
     SUPERADMIN = 3
 }
 
-const ranks: Array<string> = [
+export const ranks: Array<string> = [
     "Užívateľ",
     "Inštruktor",
     "Administrátor",
