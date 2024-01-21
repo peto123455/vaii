@@ -121,9 +121,9 @@ export const ChangePassword = async (req: Request, res: Response, next: NextFunc
     const id = (req.user as Document)._id;
         
     try {
-        const category = await User.findById(id);
+        const user = await User.findById(id);
 
-        const oldPassword = category?.password;
+        const oldPassword = user?.password;
 
         if (!bcrypt.compareSync(currentPassword, oldPassword as string)) {
             return res.status(401).send({ "error": "Zadali ste zlé heslo" });
@@ -132,9 +132,9 @@ export const ChangePassword = async (req: Request, res: Response, next: NextFunc
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
-        (category as Document).password = hash;
+        (user as Document).password = hash;
 
-        category?.save();
+        user?.save();
 
         return res.json({ "message": "Heslo úspešne zmenené !" });
     } catch (error) {
@@ -144,21 +144,26 @@ export const ChangePassword = async (req: Request, res: Response, next: NextFunc
     return res.status(404).send({ "error": "Niekde nastala chyba" });
 };
 
-/* TODO
 export const ChangePermissions = async (req: Request, res: Response, next: NextFunction) => {
 
-    const name = req.body.name;
-    const permission = req.body.permission;
+    const email = req.body.name;
+    const permissions = req.body.permissions;
     
-    if (!name || !permission) return res.status(400).send({ "error": "Nesprávny Vstup" });
+    if (!email) return res.status(400).send({ "error": "Nesprávny Vstup" });
     if (!req.user) return res.status(401).json({ "error": "Nie si prihlásený" });
-    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+    if (!HasUserPermissions(req.user, Ranks.SUPERADMIN)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
         
     try {
-        const user = await User.find({ "name": name });
+        const user = await User.find({ "email": email });
 
+        console.log(email);
 
-        user.save();
+        if(isNaN(permissions) || permissions < 0 || permissions > ranks.length - 1) return res.status(404).send({ "error": "Neexistujúca hodnosť" });
+        else if(user.length == 0) return res.status(404).send({ "error": "Používateľ neexistuje" });
+
+        (user[0] as Document).permLevel = permissions;
+
+        user[0]?.save();
 
         return res.json({ "message": "Heslo úspešne zmenené !" });
     } catch (error) {
@@ -166,4 +171,4 @@ export const ChangePermissions = async (req: Request, res: Response, next: NextF
     }
     
     return res.status(404).send({ "error": "Niekde nastala chyba" });
-};*/
+};
