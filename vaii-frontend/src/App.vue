@@ -9,7 +9,7 @@ state.methods.FetchRanksFromServer();
 state.methods.FetchUserFromServer();
 state.methods.FetchTopicsFromServer();
 state.methods.FetchCategoriesFromServer();
-state.methods.FetchCoursesFromServer();
+if (state.methods.IsLoggedIn()) state.methods.FetchCoursesFromServer();
 </script>
 
 <template>

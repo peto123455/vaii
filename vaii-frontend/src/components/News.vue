@@ -12,15 +12,12 @@ const props = defineProps({
 
 const onEditSelect = () => {
     const data = {
-      "id": props.topic.id,
-      "title": props.topic.title,
-      "image": props.topic.image,
-      "text": props.topic.description
+      "id": props.topic!.id,
+      "title": props.topic!.title,
+      "image": props.topic!.image,
+      "text": props.topic!.description
       //index: index
     }
-
-    console.log(data);
-
     emit('onEditSelect', data);
 }
 </script>
@@ -33,17 +30,17 @@ const onEditSelect = () => {
         <font-awesome-icon icon="pen-to-square" /> Upraviť
       </button>
       <div class="col p-0" v-if="flipped">
-        <img class="w-100 h-100 p-0" v-bind:src="topic.image" alt="News Image">
+        <img class="w-100 h-100 p-0" v-bind:src="topic!.image as string" alt="News Image">
       </div>
       <div class="col">
-        <h2 class="mt-5 px-5">{{ topic.title }}</h2> 
+        <h2 class="mt-5 px-5">{{ topic!.title }}</h2> 
         <h3 class="p-5 pt-0" >
           <!--<slot></slot>-->
-          {{ topic.description }}
+          {{ topic!.description }}
         </h3>
       </div>
       <div class="col p-0 shadow" v-if="!flipped">
-        <img class="w-100 h-100 p-0" v-bind:src="topic.image" alt="">
+        <img class="w-100 h-100 p-0" v-bind:src="topic!.image as string" alt="">
       </div>
     </div>
   </div>

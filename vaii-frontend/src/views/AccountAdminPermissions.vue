@@ -8,7 +8,7 @@ const permRef = ref(null);
 
 async function changePermissions() {
 
-  if (nameRef.value.value == "") return state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: "Nie je zadaný email"});
+  if ((nameRef.value! as HTMLInputElement).value == "") return state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: "Nie je zadaný email"});
 
   const requestOptions = {
     method: "POST",
@@ -18,8 +18,8 @@ async function changePermissions() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ 
-      "name": nameRef.value.value,
-      "permissions": permRef.value.selectedIndex
+      "name": (nameRef.value! as HTMLInputElement).value,
+      "permissions": (permRef.value! as HTMLSelectElement).selectedIndex
     })
   };
 

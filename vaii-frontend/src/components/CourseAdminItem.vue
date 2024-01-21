@@ -12,11 +12,11 @@ const props = defineProps({
 
 <template>
   <tr>
-    <th :class="{ 'bg-complete': course.completed }" scope="row">{{ course.name }}</th>
-    <td :class="{ 'bg-complete': course.completed }" >{{ course.email }}</td>
-    <td :class="{ 'bg-complete': course.completed }">{{ course.theoryHoursCompleted }} / {{ course.theoryHours }}</td>
-    <td :class="{ 'bg-complete': course.completed }">{{ course.driveHoursCompleted }} / {{ course.driveHours }}</td>
-    <td :class="{ 'bg-complete': course.completed }"><button @click="router.push('/account/courses/' + course.id)" type="button" class="btn btn-primary">Zobraziť</button></td>
+    <th :class="{ 'bg-complete': course!.completed }" scope="row">{{ course!.name }}</th>
+    <td :class="{ 'bg-complete': course!.completed }" >{{ course!.email }}</td>
+    <td :class="{ 'bg-complete': course!.completed }">{{ course!.theoryHoursCompleted }} / {{ course!.theoryHours }}</td>
+    <td :class="{ 'bg-complete': course!.completed }">{{ course!.driveHoursCompleted }} / {{ course!.driveHours }}</td>
+    <td :class="{ 'bg-complete': course!.completed }"><button @click="router.push('/account/courses/' + course!.id)" type="button" class="btn btn-primary">Zobraziť</button></td>
   </tr>
 </template>
 

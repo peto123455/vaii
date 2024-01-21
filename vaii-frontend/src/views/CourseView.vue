@@ -77,16 +77,16 @@ async function fetchCourse() {
       state.methods.CreatePopup({title: 'Vytvorenie skupín', msg: data["error"]});
     }
 
-    titleRef.value.textContent = data["user"]["email"];
-    nameRef.value.textContent = data["name"];
-    priceRef.value.textContent = "Cena: " + data["price"] + " €";
-    paidRef.value.textContent = "Uhradené: " + data["paid"] + " €";
-    theoryRef.value.textContent = "Hodín teórie: " + data["theoryHoursCompleted"] + " / " + data["theoryHours"];
-    ridesRef.value.textContent = "Hodín jázd: " + data["driveHoursCompleted"] + " / " + data["driveHours"];
-    completeRef.value.textContent = data["completed"] ? "Ukončený" : "";
-    descriptionRef.value.textContent = data["description"];
+    (titleRef.value! as HTMLElement).textContent = data["user"]["email"];
+    (nameRef.value! as HTMLElement).textContent = data["name"];
+    (priceRef.value! as HTMLElement).textContent = "Cena: " + data["price"] + " €";
+    (paidRef.value! as HTMLElement).textContent = "Uhradené: " + data["paid"] + " €";
+    (theoryRef.value! as HTMLElement).textContent = "Hodín teórie: " + data["theoryHoursCompleted"] + " / " + data["theoryHours"];
+    (ridesRef.value! as HTMLElement).textContent = "Hodín jázd: " + data["driveHoursCompleted"] + " / " + data["driveHours"];
+    (completeRef.value! as HTMLElement).textContent = data["completed"] ? "Ukončený" : "";
+    (descriptionRef.value! as HTMLElement).textContent = data["description"];
 
-    notesRef.value.innerHTML = data["notes"].replace(/(?:\r\n|\r|\n)/g, '<br />');
+    (notesRef.value! as HTMLElement).innerHTML = data["notes"].replace(/(?:\r\n|\r|\n)/g, '<br />');
 
     changeModal(data);
 

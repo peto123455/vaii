@@ -63,7 +63,7 @@ async function sendDelete() {
   }
 }
 
-async function enlistCourse(course: String) {
+async function enlistCourse(course: any) {
   const check = checkModalInput();
   if (check.length != 0 ) return state.methods.CreatePopup({title: 'Vytvorenie zlyhalo', msg: check });;
 

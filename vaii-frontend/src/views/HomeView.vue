@@ -55,7 +55,7 @@ async function deleteTopic() {
 
 async function updateTopic() {
 
-  const titleModel = (titleModelRef.value! as HTMLHeadingElement);
+  const titleModel = (titleModelRef.value! as HTMLInputElement);
   const imageModal = (imageModalRef.value! as HTMLInputElement);
   const textModal = (textModalRef.value! as HTMLInputElement);
 
@@ -138,7 +138,7 @@ async function createTopic() {
     :index="index" :flipped="(index % 2 == 0 ? true : false)" :topic="item as Topic"
     @onEditSelect="changeModal"/>
 
-    <div class="container">
+    <div v-if="state.methods.GetUserPermLevel() >= 1" class="container">
       <button type="button" class="btn w-100 py-3 btn-outline-primary createTopic" @click="createTopic()">Vytvoriť článok</button>
     </div>
 
@@ -165,7 +165,7 @@ async function createTopic() {
               </div>
               <div class="mb-3">
                 <label for="description" class="col-form-label">Text:</label>
-                <textarea type="text" class="form-control" ref="textModalRef" id="text"/>
+                <textarea type="text" class="form-control description-form" ref="textModalRef" id="text"/>
               </div>
             </form>
           </div>
@@ -207,5 +207,9 @@ async function createTopic() {
 .createTopic {
   outline: 5px auto;
   font-size: 25px;
+}
+
+.description-form {
+  min-height: 20vh;
 }
 </style>

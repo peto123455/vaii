@@ -72,8 +72,6 @@ const methods = {
         state.topics.push(new Topic(data[topic]["_id"] as string, data[topic]["title"] as string, data[topic]["description"] as string, data[topic]["image"] as string));
       }
 
-      console.log(state.topics);
-
     } catch (error: any) {
       console.log(error);
       methods.CreatePopup({title: 'Sťahovanie článkov', msg: 'Nepodarilo sa kontaktovať server, nebolo možné získať články'});

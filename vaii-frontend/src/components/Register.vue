@@ -3,6 +3,12 @@ import { onMounted, ref } from "vue";
 import state from "@/state"
 import { GetAPIUrl } from "@/config"
 
+const emit = defineEmits(['toLogin'])
+ 
+const moveToLogin = () => {
+    emit('toLogin', false);
+}
+
 const emailRef = ref(null);
 const passwordRef = ref(null);
 const confirmPasswordRef = ref(null);
@@ -78,6 +84,7 @@ async function sendRegistration() {
       const data = await res.json();
 
       if (data && data.length == 0) {
+        moveToLogin();
         state.methods.CreatePopup({title: 'Registrácia úspešná', msg: 'Úspešne ste sa zaregistrovali.'});
       } else {
         state.methods.CreatePopup({title: 'Registrácia zlyhala', msg: 'Niekde nastala chyba.'});
@@ -105,15 +112,15 @@ onMounted(() => {
     <form name="registration" method="post" class="mt-3">
       <div class="input-group">
         <span class="input-group-text"><font-awesome-icon icon="envelope" /></span>
-        <input type="email" class="form-control" placeholder="Email" required="true" id="email" ref="emailRef" @keyup="checkInput();">
+        <input type="email" class="form-control" placeholder="Email" required="true" id="emailRegister" autocomplete="email" ref="emailRef" @keyup="checkInput();">
       </div>
       <div class="input-group mt-2">
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
-        <input type="password" class="form-control" placeholder="Heslo" required="true" id="password" ref="passwordRef" @keyup="checkInput();">
+        <input type="password" class="form-control" placeholder="Heslo" required="true" id="passwordRegister" autocomplete="new-password" ref="passwordRef" @keyup="checkInput();">
       </div>
       <div class="input-group mt-2">
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
-        <input type="password" class="form-control" placeholder="Heslo znovu" required="true" id="confirm_password" ref="confirmPasswordRef" @keyup="checkInput();">
+        <input type="password" class="form-control" placeholder="Heslo znovu" required="true" id="confirm_password" autocomplete="new-password" ref="confirmPasswordRef" @keyup="checkInput();">
       </div>
       <button type="button" 
       @click="sendRegistration()"

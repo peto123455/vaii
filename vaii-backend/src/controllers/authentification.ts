@@ -156,8 +156,6 @@ export const ChangePermissions = async (req: Request, res: Response, next: NextF
     try {
         const user = await User.find({ "email": email });
 
-        console.log(email);
-
         if(isNaN(permissions) || permissions < 0 || permissions > ranks.length - 1) return res.status(404).send({ "error": "Neexistujúca hodnosť" });
         else if(user.length == 0) return res.status(404).send({ "error": "Používateľ neexistuje" });
 

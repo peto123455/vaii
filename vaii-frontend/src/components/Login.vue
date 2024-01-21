@@ -58,11 +58,11 @@ async function sendLogin() {
     <form name="login" method="post" class="mt-3">
       <div class="input-group">
         <span class="input-group-text"><font-awesome-icon icon="envelope" /></span>
-        <input type="email" class="form-control" placeholder="Email" required="true" ref="emailRef" id="email">
+        <input type="email" class="form-control" placeholder="Email" required="true" ref="emailRef" autocomplete="email" id="email">
       </div>
       <div class="input-group mt-2">
         <span class="input-group-text"><font-awesome-icon icon="lock" /></span>
-        <input type="password" class="form-control" placeholder="Heslo" required="true" ref="passwordRef" id="password">
+        <input type="password" class="form-control" placeholder="Heslo" required="true" ref="passwordRef" autocomplete="current-password" id="password">
       </div>
       <button type="button" 
       @click="sendLogin()" 
