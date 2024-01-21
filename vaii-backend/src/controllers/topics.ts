@@ -62,3 +62,29 @@ export const DeleteTopic = async (req: Request, res: Response, next: NextFunctio
 
     return res.status(404).json({ "error": "Nepodarilo sa nájsť kategóriu !" });
 };
+
+export const UpdateTopic = async (req: Request, res: Response, next: NextFunction) => {
+
+    const id = req.body.id;
+    const title = req.body.title;
+    const image = req.body.image;
+    const description = req.body.description;
+
+    if (!id || !title || !image || !description) return res.status(400).json({ "error": "Nezadali ste potrebné parametre !" });
+    if (!req.user) return res.status(401).json({ "error": "Nie ste prihlásený !" });
+    if (!HasUserPermissions(req.user, Ranks.ADMINISTRATOR)) return res.status(401).json({ "error": "Nemáte oprávnenia pre túto akciu !" });
+
+    try {
+        const topic = await Topic.findByIdAndUpdate(id, {
+            "title": title,
+            "image": image,
+            "description": description
+        });
+
+        return res.json(topic);
+    } catch (error) {
+        console.log(error);
+    }
+    
+    return res.status(404).json({ "error": "Nepodarilo sa nájsť kurz !" });
+};

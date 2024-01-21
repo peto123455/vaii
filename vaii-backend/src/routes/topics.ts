@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.route('/').post(Topic.CreateTopic)
     .get(Topic.ListTopics)
-    .delete(Topic.DeleteTopic);
+    .delete(Topic.DeleteTopic)
+    .put(Topic.UpdateTopic);
 
 export default router;

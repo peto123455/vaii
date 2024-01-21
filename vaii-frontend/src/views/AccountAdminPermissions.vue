@@ -8,33 +8,35 @@ const permRef = ref(null);
 
 async function changePermissions() {
 
-const requestOptions = {
-  method: "POST",
-  credentials: 'include',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ 
-    "name": nameRef.value.value,
-    "permissions": permRef.value.selectedIndex
-  })
-};
+  if (nameRef.value.value == "") return state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: "Nie je zadaný email"});
 
-try {
-  const res = await fetch(GetAPIUrl("/auth/set-permissions"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
-  const data = await res.json();
+  const requestOptions = {
+    method: "POST",
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+      "name": nameRef.value.value,
+      "permissions": permRef.value.selectedIndex
+    })
+  };
 
-  if (data["error"]) {
-    state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: data["error"]});
-  } else {
-    state.methods.CreatePopup({title: 'Hodnosť nastavená', msg: "Hodnosť úspešne nastavená"});
+  try {
+    const res = await fetch(GetAPIUrl("/auth/set-permissions"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
+    const data = await res.json();
+
+    if (data["error"]) {
+      state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: data["error"]});
+    } else {
+      state.methods.CreatePopup({title: 'Hodnosť nastavená', msg: "Hodnosť úspešne nastavená"});
+    }
+    
+  } catch (error: any) {
+    console.log(error);
+    state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: 'Nepodarilo sa kontaktovať server'});
   }
-  
-} catch (error: any) {
-  console.log(error);
-  state.methods.CreatePopup({title: 'Nastavenie zlyhalo', msg: 'Nepodarilo sa kontaktovať server'});
-}
 }
 </script>
 

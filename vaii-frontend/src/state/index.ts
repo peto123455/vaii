@@ -32,7 +32,7 @@ const methods = {
       const res = await fetch(GetAPIUrl("/auth/ranks"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
-      state.categories = [];
+      state.ranks = [];
 
       if (data["error"]) {
         return methods.CreatePopup({title: 'Sťahovanie hodností', msg: data["error"]});
@@ -62,7 +62,7 @@ const methods = {
       const res = await fetch(GetAPIUrl("/topics"), requestOptions as RequestInit); //TODO: Prerobiť na .env backend url
       const data = await res.json();
 
-      state.categories = [];
+      state.topics = [];
 
       if (data["error"]) {
         return methods.CreatePopup({title: 'Sťahovanie článkov', msg: data["error"]});
